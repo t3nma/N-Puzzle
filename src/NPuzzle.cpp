@@ -3,6 +3,7 @@
  */
 
 #include "Configuration.h"
+using namespace std;
 
 // constructor
 NPuzzle::NPuzzle(int N=4)
