@@ -19,8 +19,8 @@ public:
     
 private:
     int N;
-    Configuration *original;
-    Configuration *goal;
+    Configuration *startConfig;
+    Configuration *goalConfig;
 
     /* methods */
     void init();
