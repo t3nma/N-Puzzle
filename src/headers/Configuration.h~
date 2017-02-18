@@ -1,0 +1,19 @@
+/*
+ * Configuration.h
+ *
+ * Configuration model its definition, member-functions
+ * implemented in Configuration.cpp
+ */
+
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
+
+using namespace std;
+
+class Configuration
+{
+public:
+private:
+};
+
+#endif
