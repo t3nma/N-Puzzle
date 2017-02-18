@@ -8,7 +8,7 @@ using namespace std;
 // constructor
 NPuzzle::NPuzzle(int N=4)
 {
-    this->N = 4;
+    this->N = N;
     init();
 }
 
