@@ -6,18 +6,24 @@
 using namespace std;
 
 // constructor
-Configuration::Configuration(const Board& state, Configuration *parent, int depth)
-    : state(state), depth(depth)
-{
-    this->parent = parent;
+Configuration::Configuration(const Board& state, int depth, Configuration* parent)
+    : state(state), depth(depth), parent(parent)
+{ }
 
-    cout << "FDS: " << this->state << endl;
-}
+// copy constructor
+Configuration::Configuration(const Configuration& c)
+    : state(c.state), depth(c.depth), parent(c.parent)
+{ }
 
-// destructor
-Configuration::~Configuration()
+// = operation support
+Configuration& Configuration::operator=(const Configuration& c)
 {
+    Configuration *newPtr = c.parent;
     delete parent;
+    parent = newPtr;
+    
+    state = c.state;
+    depth = c.depth;
 }
 
 vector<Configuration> Configuration::makeDescendants()
@@ -25,15 +31,8 @@ vector<Configuration> Configuration::makeDescendants()
     vector<Configuration> descendants;
     vector<Board> stateDescendants = state.makeDescendants();
 
-    vector<Board>::iterator it = stateDescendants.begin();
-    for(; it!=stateDescendants.end(); ++it)
-    {
-	/* TODO FIX
-         *
-	Configuration newConfig(*it, (this), depth+1);
-        descendants.push_back( newConfig );
-	 */
-    }
+    for(vector<Board>::iterator it = stateDescendants.begin(); it!=stateDescendants.end(); ++it)
+	descendants.push_back( Configuration(*it, depth+1, this) );
     
     return descendants;	    
 }
@@ -53,7 +52,7 @@ ostream& operator<<(ostream& os, const Configuration& c)
 {
     os << "------- Configuration -------\n\n";
     os << "Depth: " << c.depth << endl << endl;
-    os << "State: \n" << c.state << endl;
+    os << "State: \n" << c.state << endl << endl;
     
     return os;
 }

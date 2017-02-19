@@ -15,9 +15,10 @@ using namespace std;
 class Configuration
 {
 public:
-    Configuration(const Board& state, Configuration *parent=NULL, int depth=0);
-    ~Configuration();
-
+    Configuration(const Board& state, int depth=0, Configuration* parent=NULL);
+    Configuration(const Configuration& c);
+    Configuration& operator=(const Configuration& c);
+    
     /* util */
     vector<Configuration> makeDescendants();
     bool isSolvable(const Configuration& goal) const;
@@ -27,8 +28,8 @@ public:
     friend ostream& operator<<(ostream& os, const Configuration& c);
     
 private:
-    Configuration *parent;
     Board state;
+    Configuration *parent;
     int depth;
 };
 

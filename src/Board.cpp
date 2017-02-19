@@ -75,7 +75,7 @@ Board::Board(const Board& b)
     }
 }
 
-// assignment operation support
+// = operation support
 Board& Board::operator=(const Board& b)
 {
     int** newArr = new int*[b.size];
