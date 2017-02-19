@@ -29,9 +29,10 @@ vector<Configuration> Configuration::makeDescendants()
     for(; it!=stateDescendants.end(); ++it)
     {
 	/* TODO FIX
+         *
 	Configuration newConfig(*it, (this), depth+1);
         descendants.push_back( newConfig );
-	*/
+	 */
     }
     
     return descendants;	    
