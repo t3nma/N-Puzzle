@@ -164,10 +164,53 @@ void Board::printBoard() const
 
 bool Board::isIn(int x, int y) const
 {
-    return x >= 0 && x <= size && y >= 0 && y <= size;
+    return x >= 0 && x < size && y >= 0 && y < size;
 }
 
 int Board::invCount(int *bInv, int lo, int hi) const
 {
-    return 0;
+    /* Counts the number of inversions using mergesort O(log n) */
+    int count = 0;
+    int mid;
+    
+    if (lo<hi)
+    {
+        mid = lo+(hi-lo)/2;
+        invCount(bInv, lo, mid);
+        invCount(bInv, mid+1, hi);
+        count += merge(bInv, lo, mid, high);
+    }
+    return count;
 }
+
+int Board::merge(int *bInv, int lo, int mid, int hi) const
+{
+    int count, i, p1, p2, aux[end+1];
+
+    p1 = lo;    
+    p2 = mid+1; 
+    i = lo;
+    
+    while (p1 <= mid && p2 <= hi)
+    {          
+        if (v[p1] <= v[p2])
+            aux[i++] = v[p1++];
+        else
+        {
+            aux[i++] = v[p2++];
+            count += mid-p1+1;
+        }
+    }
+    
+    while (p1 <= mid)
+            aux[i++] = v[p1++];   
+    while (p2 <= hi)
+            aux[i++] = v[p2++];
+    
+    for (i=lo; i<=hi; i++)
+            v[i] = aux[i];
+
+    return count;
+}
+
+
