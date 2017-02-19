@@ -165,6 +165,7 @@ bool Board::isSolvable(const Board& goal) const
     int ib[(size*size)+1];
     int bInv[(size*size)+1];
     int numInv = 0;
+    
     for (int i=0; i<size*size; i++)
     {
 	b[i+1] = goal.arr[i/size][i%size] == 0 ? size*size : goal.arr[i/size][i%size];
@@ -187,7 +188,6 @@ bool Board::isSolvable(const Board& goal) const
     
     numInv += invCount(bInv, 1, size*size);
 
-    //    cout << "NUM_INV = " << numInv << endl;
     return ( !IS_EVEN(size) && IS_EVEN(numInv) ) ||
            ( IS_EVEN(size) && ( (IS_EVEN(numInv) && !IS_EVEN(blankX)) || (!IS_EVEN(numInv) && IS_EVEN(blankX)) ) );
 }
