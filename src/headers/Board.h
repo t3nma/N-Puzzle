@@ -7,9 +7,9 @@
 
 #ifndef BOARD_H
 #define BOARD_H
-
 #define IS_EVEN(N) (N%2 == 0)
 
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -20,24 +20,32 @@ public:
     static const int MOVES_X[];
     static const int MOVES_Y[];
 
-    Board(int **arr, int size);
-    Board(const Board& board);
+    Board(int size);
+    Board(const Board& b);
+    Board& operator=(const Board& b);
     ~Board();
-    
+
+    /* getters */
+    int **getArr() const;
+
     /* util */
     vector<Board> makeDescendants();
     int manhattanDist(const Board& goal) const;
     bool isSolvable(const Board& goal) const;
-    void printBoard() const;
+
+    /* operator overloading */
+    friend istream& operator>>(istream& is, Board& b);
+    friend ostream& operator<<(ostream& os, const Board& b);
     
 private:
     int **arr;
     int size;
-    int blank_x, blank_y;
+    int blankX;
+    int blankY;
     
     bool isIn(int x, int y) const;
-    int invCount(int *bInv, int lo, int hi) const;
-    int merge(int *bInv, int lo, int mid, int hi) const;
+    //int invCount(int *bInv, int lo, int hi) const;
+    //int merge(int *bInv, int lo, int mid, int hi) const;
 };
 
 #endif
