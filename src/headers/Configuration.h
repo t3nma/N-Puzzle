@@ -15,16 +15,17 @@ using namespace std;
 class Configuration
 {
 public:
-    Configuration(Board state, int depth);
-
+    Configuration(Configuration *parent, const Board& state, int depth);
+    ~Configuration();
+    
     /* util */
     vector<Configuration> makeDescendants() const;
     bool isSolvable(const Configuration& goal) const;
     int cost(bool greedy, const Configuration& goal) const;
     
 private:
+    Configuration *parent;
     Board *state;
-    Board *parent;
     int depth;
 };
 
