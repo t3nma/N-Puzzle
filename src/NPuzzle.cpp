@@ -2,7 +2,7 @@
  * NPuzzle.cpp
  */
 
-#include "Configuration.h"
+#include "headers/Configuration.h"
 using namespace std;
 
 // constructor
