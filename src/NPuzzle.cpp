@@ -23,10 +23,8 @@ NPuzzle::~NPuzzle()
 // A* search implementation
 void NPuzzle::Astar() const
 {
-    // TODO
     cout << *startConfig << endl;
     cout << *goalConfig << endl;
-    return;
 }
 
 // Greedy search implementation

@@ -15,7 +15,7 @@ using namespace std;
 class Configuration
 {
 public:
-    Configuration(const Board& state, int depth=0, Configuration* parent=NULL);
+    Configuration(const Board& state, int depth=1, Configuration* parent=NULL);
     Configuration(const Configuration& c);
     Configuration& operator=(const Configuration& c);
     
