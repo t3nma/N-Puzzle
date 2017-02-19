@@ -38,7 +38,7 @@ void NPuzzle::greedy() const
 // with its current configurations
 bool NPuzzle::isSolvable() const
 {
-  return startConfig.isSolvable(goalConfig);
+  return startConfig->isSolvable(goalConfig);
 }
 
 // initialize the puzzle configurations

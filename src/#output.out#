@@ -1,0 +1,101 @@
+bruno@bruno-Aspire-E5-571G:~/FCUP/semestre2/IA/tps/t1/N-Puzzle/src$ g++ -Wall NPu
+bruno@bruno-Aspire-E5-571G:~/FCUP/semestre2/IA/tps/t1/N-Puzzle/src$ g++ -Wall NPuzzle.cpp Configuration.cpp Board.cpp 
+NPuzzle.cpp:9:1: error: ‘NPuzzle’ does not name a type
+ NPuzzle::NPuzzle(int N=4)
+ ^
+NPuzzle.cpp:16:1: error: ‘NPuzzle’ does not name a type
+ NPuzzle::~NPuzzle()
+ ^
+NPuzzle.cpp:23:6: error: ‘NPuzzle’ has not been declared
+ void NPuzzle::Astar() const
+      ^
+NPuzzle.cpp:23:23: error: non-member function ‘void Astar()’ cannot have cv-qualifier
+ void NPuzzle::Astar() const
+                       ^
+NPuzzle.cpp:30:6: error: ‘NPuzzle’ has not been declared
+ void NPuzzle::greedy() const
+      ^
+NPuzzle.cpp:30:24: error: non-member function ‘void greedy()’ cannot have cv-qualifier
+ void NPuzzle::greedy() const
+                        ^
+NPuzzle.cpp:38:6: error: ‘NPuzzle’ has not been declared
+ bool NPuzzle::isSolvable() const
+      ^
+NPuzzle.cpp:38:28: error: non-member function ‘bool isSolvable()’ cannot have cv-qualifier
+ bool NPuzzle::isSolvable() const
+                            ^
+NPuzzle.cpp: In function ‘bool isSolvable()’:
+NPuzzle.cpp:40:10: error: ‘startConfig’ was not declared in this scope
+   return startConfig.isSolvable(goalConfig);
+          ^
+NPuzzle.cpp:40:33: error: ‘goalConfig’ was not declared in this scope
+   return startConfig.isSolvable(goalConfig);
+                                 ^
+NPuzzle.cpp: At global scope:
+NPuzzle.cpp:44:6: error: ‘NPuzzle’ has not been declared
+ void NPuzzle::init() const
+      ^
+NPuzzle.cpp:44:22: error: non-member function ‘void init()’ cannot have cv-qualifier
+ void NPuzzle::init() const
+                      ^
+Configuration.cpp: In member function ‘std::vector<Configuration> Configuration::makeDescendants() const’:
+Configuration.cpp:25:45: error: ‘class Board’ has no member named ‘getDescendants’
+     vector<Board> stateDescendants = state->getDescendants();
+                                             ^
+Configuration.cpp:26:34: error: ‘stateChilds’ was not declared in this scope
+     vector<Board>::iterator it = stateChilds.begin();
+                                  ^
+Configuration.cpp:30:64: error: invalid conversion from ‘const Configuration*’ to ‘Configuration*’ [-fpermissive]
+         descendants.push_back( Configuration(this, *it, depth+1) );
+                                                                ^
+Configuration.cpp:10:1: note:   initializing argument 1 of ‘Configuration::Configuration(Configuration*, const Board&, int)’
+ Configuration::Configuration(Configuration *parent, const Board& state, int depth) : depth(depth)
+ ^
+Board.cpp:59:1: error: prototype for ‘Board::Board(int*, int)’ does not match any in class ‘Board’
+ Board::Board(int *arr, int size) : size(size)
+ ^
+In file included from Board.cpp:5:0:
+headers/Board.h:24:5: error: candidates are: Board::Board(const Board&)
+     Board(const Board& board);
+     ^
+headers/Board.h:23:5: error:                 Board::Board(int**, int)
+     Board(int **arr, int size);
+     ^
+Board.cpp: In member function ‘std::vector<Board> Board::makeDescendants() const’:
+Board.cpp:112:49: error: no matching function for call to ‘Board::Board(int [((const Board*)this)->Board::size][((const Board*)this)->Board::siz
+e], const int&)’
+         descendants.push_back( Board(newArr,size) );
+                                                 ^
+Board.cpp:78:1: note: candidate: Board::Board(const Board&)
+ Board::Board(const Board& board) : size(board.size), blank_x(board.blank_x), blank_y(board.blank_y)
+ ^
+Board.cpp:78:1: note:   candidate expects 1 argument, 2 provided
+In file included from Board.cpp:5:0:
+headers/Board.h:23:5: note: candidate: Board::Board(int**, int)
+     Board(int **arr, int size);
+     ^
+headers/Board.h:23:5: note:   no known conversion for argument 1 from ‘int [((const Board*)this)->Board::size][((const Board*)this)->Board::size
+]’ to ‘int**’
+Board.cpp: In member function ‘bool Board::isSolvable(const Board&) const’:
+Board.cpp:140:20: error: no match for ‘operator[]’ (operand types are ‘const Board’ and ‘int’)
+         b[i] = goal[i/size][i%size] == 0 ? size*size : goal[i/size][i%size];
+                    ^
+Board.cpp:140:60: error: no match for ‘operator[]’ (operand types are ‘const Board’ and ‘int’)
+         b[i] = goal[i/size][i%size] == 0 ? size*size : goal[i/size][i%size];
+                                                            ^
+Board.cpp:145:49: error: passing ‘const Board’ as ‘this’ argument discards qualifiers [-fpermissive]
+     int numInv = invCount(bInv, 1, (size*size)+1);
+                                                 ^
+In file included from Board.cpp:5:0:
+headers/Board.h:39:9: note:   in call to ‘int Board::invCount(int*, int, int)’
+     int invCount(int *bInv, int lo, int hi);
+         ^
+Board.cpp: At global scope:
+Board.cpp:161:6: error: prototype for ‘bool Board::isIn(int, int)’ does not match any in class ‘Board’
+ bool Board::isIn(int x, int y)
+      ^
+In file included from Board.cpp:5:0:
+headers/Board.h:38:10: error: candidate is: bool Board::isIn(int, int) const
+     bool isIn(int x, int y) const;
+          ^
+bruno@bruno-Aspire-E5-571G:~/FCUP/semestre2/IA/tps/t1/N-Puzzle/src$ ls
