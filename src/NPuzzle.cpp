@@ -2,6 +2,7 @@
  * NPuzzle.cpp
  */
 
+#include "headers/NPuzzle.h"
 #include "headers/Configuration.h"
 using namespace std;
 

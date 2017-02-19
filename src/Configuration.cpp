@@ -22,11 +22,11 @@ Configuration::~Configuration()
 
 vector<Configuration> Configuration::makeDescendants() const
 {
-    vector<Board> stateDescendants = state->getDescendants();
-    vector<Board>::iterator it = stateChilds.begin();
+    vector<Board> stateDescendants = state->makeDescendants();
+    vector<Board>::iterator it = stateDescendants.begin();
 
     vector<Configuration> descendants;
-    for(; it!=stateChilds.end(); ++it)
+    for(; it!=stateDescendants.end(); ++it)
         descendants.push_back( Configuration(this, *it, depth+1) );
 
     return descendants;	    
