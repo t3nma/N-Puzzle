@@ -24,6 +24,8 @@ Configuration& Configuration::operator=(const Configuration& c)
     
     state = c.state;
     depth = c.depth;
+
+    return *this;
 }
 
 vector<Configuration> Configuration::makeDescendants()

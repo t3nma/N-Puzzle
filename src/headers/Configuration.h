@@ -29,8 +29,8 @@ public:
     
 private:
     Board state;
-    Configuration *parent;
     int depth;
+    Configuration *parent;
 };
 
 #endif
