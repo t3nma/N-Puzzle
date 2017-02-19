@@ -44,8 +44,8 @@ private:
     int blankY;
     
     bool isIn(int x, int y) const;
-    //int invCount(int *bInv, int lo, int hi) const;
-    //int merge(int *bInv, int lo, int mid, int hi) const;
+    int invCount(int *bInv, int lo, int hi) const;
+    int merge(int *bInv, int lo, int mid, int hi) const;
 };
 
 #endif

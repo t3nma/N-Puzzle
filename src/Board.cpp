@@ -163,23 +163,21 @@ bool Board::isSolvable(const Board& goal) const
     int bInv[(size*size)+1];
     
     for (int i=1; i<(size*size)+1; i++)
-        b[i] = goal.arr[i/size][i%size] == 0 ? size*size : goal.arr[i/size][i%size];
+      b[i] = goal.arr[i/size][i%size] == 0 ? size*size : goal.arr[i/size][i%size];
 
     for (int i=1; i<(size*size)+1; i++)
         bInv[b[i]] = i;
     
-    //int numInv = invCount(bInv, 1, (size*size)+1);
+    int numInv = invCount(bInv, 1, (size*size)+1);
 
-    //return ( !IS_EVEN(size) && IS_EVEN(numInv) ) ||
-    //       ( IS_EVEN(size) && ( (IS_EVEN(numInv) && !IS_EVEN(blank_y+1)) || (!IS_EVEN(numInv) && IS_EVEN(blank_y+1)) ) );
-    return 0;
+    return ( !IS_EVEN(size) && IS_EVEN(numInv) ) ||
+          ( IS_EVEN(size) && ( (IS_EVEN(numInv) && !IS_EVEN(blankY+1)) || (!IS_EVEN(numInv) && IS_EVEN(blankY+1)) ) );
 }
 
 // >> operator support
 // read board and find the blank (x,y) position
 istream& operator>>(istream& is, Board& b)
 {
-    cout << "Insira um tabuleiro " << b.size << "x" << b.size << ":" << endl;
 
     for(int i=0; i<b.size; ++i)
 	for(int j=0; j<b.size; ++j)
@@ -193,7 +191,7 @@ istream& operator>>(istream& is, Board& b)
 		b.blankY = j;
 	    }
 	}
-    
+
     return is;
 }
 
@@ -206,7 +204,7 @@ ostream& operator<<(ostream& os, const Board& b)
 	for(int j=0; j<b.size; ++j)
 	    cout << setw(2) << b.arr[i][j] << " ";
 	cout << endl;
-    }
+  }
 
     return os;
 }
@@ -218,10 +216,11 @@ bool Board::isIn(int x, int y) const
     return x >= 0 && x < size && y >= 0 && y < size;
 }
 
-/*
+// Counts the number of inversions using mergesort O(log n)
+
 int Board::invCount(int *bInv, int lo, int hi) const
 {
-    // Counts the number of inversions using mergesort O(log n)
+   
     int count = 0;
     int mid;
     
@@ -230,38 +229,39 @@ int Board::invCount(int *bInv, int lo, int hi) const
         mid = lo+(hi-lo)/2;
         invCount(bInv, lo, mid);
         invCount(bInv, mid+1, hi);
-        count += merge(bInv, lo, mid, high);
+        count += merge(bInv, lo, mid, hi);
     }
     return count;
 }
 
+// Instead of merging two parts of the list, it counts the
+// number of inversions that he would have made by merging
+// them and maintaining the resulting list in order
 int Board::merge(int *bInv, int lo, int mid, int hi) const
 {
-    int count, i, p1, p2, aux[end+1];
+    int count, i, p1, p2, aux[hi+1];
 
     p1 = lo;    
     p2 = mid+1; 
     i = lo;
     
     while (p1 <= mid && p2 <= hi)
-    {          
-        if (v[p1] <= v[p2])
-            aux[i++] = v[p1++];
+        if (bInv[p1] <= bInv[p2])
+            aux[i++] = bInv[p1++];
         else
         {
-            aux[i++] = v[p2++];
+            aux[i++] = bInv[p2++];
             count += mid-p1+1;
         }
-    }
     
     while (p1 <= mid)
-            aux[i++] = v[p1++];   
+            aux[i++] = bInv[p1++];   
     while (p2 <= hi)
-            aux[i++] = v[p2++];
+            aux[i++] = bInv[p2++];
     
     for (i=lo; i<=hi; i++)
-            v[i] = aux[i];
+            bInv[i] = aux[i];
 
     return count;
 }
-*/
+
