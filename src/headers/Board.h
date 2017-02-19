@@ -25,7 +25,7 @@ public:
     ~Board();
     
     /* util */
-    vector<Board> makeDescendants() const;
+    vector<Board> makeDescendants();
     int manhattanDist(const Board& goal) const;
     bool isSolvable(const Board& goal) const;
     void printBoard() const;
@@ -36,7 +36,7 @@ private:
     int blank_x, blank_y;
     
     bool isIn(int x, int y) const;
-    int invCount(int *bInv, int lo, int hi);
+    int invCount(int *bInv, int lo, int hi) const;
 };
 
 #endif

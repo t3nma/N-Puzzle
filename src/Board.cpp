@@ -56,7 +56,7 @@ using namespace std;
 const int Board::MOVES_X[] = {+1, 0,-1, 0};
 const int Board::MOVES_Y[] = { 0,+1, 0,-1};
 
-Board::Board(int *arr, int size) : size(size)
+Board::Board(int **arr, int size) : size(size)
 {
     this->arr = new *int[size];
     for(int i=0; i<size; ++i)
@@ -75,11 +75,15 @@ Board::Board(int *arr, int size) : size(size)
     }
 }
 
-Board::Board(const Board& board) : size(board.size), blank_x(board.blank_x), blank_y(board.blank_y)
+Board::Board(const Board& board)
 {
-  for (int i=0; i<size; i++)
-      for (int j=0; j<size; j++)
-          this->arr[i][j] = board.arr[i][j];
+    this->size = board.size;
+    this->blank_x = blank_x;
+    this->blank_y = blank_y;
+    
+    for (int i=0; i<size; i++)
+	for (int j=0; j<size; j++)
+	    this->arr[i][j] = board.arr[i][j];
 }
 
 Board::~Board()
@@ -89,7 +93,7 @@ Board::~Board()
     delete [] arr;
 }
 
-vector<Board> Board::makeDescendants() const
+vector<Board> Board::makeDescendants()
 {
     vector<Board> descendants;
     
@@ -137,7 +141,7 @@ bool Board::isSolvable(const Board& goal) const
     int bInv[(size*size)+1];
     
     for (int i=1; i<(size*size)+1; i++)
-        b[i] = goal[i/size][i%size] == 0 ? size*size : goal[i/size][i%size];
+        b[i] = goal.arr[i/size][i%size] == 0 ? size*size : goal.arr[i/size][i%size];
 
     for (int i=1; i<(size*size)+1; i++)
         bInv[b[i]] = i;
@@ -158,12 +162,12 @@ void Board::printBoard() const
     }
 }
 
-bool Board::isIn(int x, int y)
+bool Board::isIn(int x, int y) const
 {
     return x >= 0 && x <= size && y >= 0 && y <= size;
 }
 
-int Board::invCount(int *bInv, int lo, int hi)
+int Board::invCount(int *bInv, int lo, int hi) const
 {
     return 0;
 }
