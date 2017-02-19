@@ -55,7 +55,7 @@ using namespace std;
 const int Board::MOVES_X[] = {1, 0, -1, 0};
 const int Board::MOVES_Y[] = {0, 1, 0, -1};
 
-// constructor
+// 1-param constructor
 Board::Board(int size)
     : arr(new int*[size]), size(size), blankX(-1), blankY(-1)
 {
@@ -78,6 +78,8 @@ Board::Board(const Board& b)
 // assignment operation support
 Board& Board::operator=(const Board& b)
 {
+    int** newArr = new int*[b.size];
+    
     for(int i=0; i<b.size; ++i)
     {
 	newArr[i] = new int[b.size];
