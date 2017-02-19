@@ -157,12 +157,14 @@ int Board::manhattanDist(const Board& goal) const
     return dist;
 }
 
+// Returns true if the goal state is reachable
+// from the start state or false otherwise
 bool Board::isSolvable(const Board& goal) const
 {    
     int b[(size*size)+1];
     int ib[(size*size)+1];
     int bInv[(size*size)+1];
-    
+    int numInv = 0;
     for (int i=0; i<size*size; i++)
     {
 	b[i+1] = goal.arr[i/size][i%size] == 0 ? size*size : goal.arr[i/size][i%size];
@@ -172,22 +174,20 @@ bool Board::isSolvable(const Board& goal) const
     for (int i=1; i<=size*size; i++)
     {
 	int valueArr = arr[(i-1)/size][(i-1)%size];
-	valueArr == 0 ? bInv[i] = ib[size*size] : bInv[i] = ib[valueArr];
+	if (valueArr == 0)
+	{
+	    bInv[i] = ib[size*size];
+	    // Compensation for the number of inversions due to
+	    // the blank square represented by size*size
+	    numInv -= (size*size)-i;
+	}
+	else
+	    bInv[i] = ib[valueArr];
     }
     
-    //int numInv = invCount(bInv, 1, size*size);
+    numInv += invCount(bInv, 1, size*size);
 
-    int numInv = 0;
-    for(int i=1; i<=size*size; ++i)
-	for(int j=i+1; j<=size*size; ++j)
-	{
-	    if(bInv[i] == size*size)
-		continue;
-	    
-	    if( bInv[i] > bInv[j] )
-		numInv++;
-	}
-
+    //    cout << "NUM_INV = " << numInv << endl;
     return ( !IS_EVEN(size) && IS_EVEN(numInv) ) ||
            ( IS_EVEN(size) && ( (IS_EVEN(numInv) && !IS_EVEN(blankX)) || (!IS_EVEN(numInv) && IS_EVEN(blankX)) ) );
 }
@@ -243,8 +243,8 @@ int Board::invCount(int *bInv, int lo, int hi) const
     if (lo<hi)
     {
         int mid = lo+(hi-lo)/2;
-        invCount(bInv, lo, mid);
-        invCount(bInv, mid+1, hi);
+        count += invCount(bInv, lo, mid);
+        count += invCount(bInv, mid+1, hi);
         count += merge(bInv, lo, mid, hi);
     }
     
@@ -263,21 +263,24 @@ int Board::merge(int *bInv, int lo, int mid, int hi) const
     i = lo;
     
     while (p1 <= mid && p2 <= hi)
+    {
         if (bInv[p1] <= bInv[p2])
             aux[i++] = bInv[p1++];
         else
         {
             aux[i++] = bInv[p2++];
-            count += mid-p1+1;
+	    count += mid-p1+1;
         }
+    }
     
     while (p1 <= mid)
-            aux[i++] = bInv[p1++];   
+	aux[i++] = bInv[p1++];
+
     while (p2 <= hi)
-            aux[i++] = bInv[p2++];
+	aux[i++] = bInv[p2++];
     
     for (i=lo; i<=hi; i++)
-            bInv[i] = aux[i];
+	bInv[i] = aux[i];
 
     return count;
 }

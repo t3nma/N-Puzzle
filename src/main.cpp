@@ -4,7 +4,7 @@
 
 int main()
 {
-    NPuzzle p(3);
+    NPuzzle p;
 
     if(p.isSolvable())
 	cout << "IS SOLVABLE :)\n";
