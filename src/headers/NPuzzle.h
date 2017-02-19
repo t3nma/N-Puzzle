@@ -7,7 +7,7 @@ using namespace std;
 class NPuzzle
 {
 public:
-    NPuzzle(int);
+    NPuzzle(int N=4);
     ~NPuzzle();
 
     /* search methods */

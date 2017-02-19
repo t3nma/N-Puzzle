@@ -7,7 +7,7 @@
 using namespace std;
 
 // constructor
-NPuzzle::NPuzzle(int N=4)
+NPuzzle::NPuzzle(int N)
 {
     this->N = N;
     init();
@@ -24,6 +24,8 @@ NPuzzle::~NPuzzle()
 void NPuzzle::Astar() const
 {
     // TODO
+    cout << *startConfig << endl;
+    cout << *goalConfig << endl;
     return;
 }
 
@@ -38,12 +40,20 @@ void NPuzzle::greedy() const
 // with its current configurations
 bool NPuzzle::isSolvable() const
 {
-  return startConfig->isSolvable(goalConfig);
+    return startConfig->isSolvable(*goalConfig);
 }
 
 // initialize the puzzle configurations
-void NPuzzle::init() const
+void NPuzzle::init()
 {
-    // todo
-    return;
+    Board s(N);
+    cout << "Insira a configuração inicial: (" << N << "x" << N << ")" << endl;
+    cin >> s;
+
+    Board e(N);
+    cout << "\nInsira a configuração final: (" << N << "x" << N << ")" << endl;
+    cin >> e;
+
+    startConfig = new Configuration(s);
+    goalConfig = new Configuration(e);
 }
