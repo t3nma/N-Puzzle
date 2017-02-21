@@ -115,7 +115,7 @@ int** Board::getArr() const
     return arr;
 }
 
-// return board descendants, which are
+// return board descendants which are
 // consequence of the blank piece allowed movements
 vector<Board> Board::makeDescendants()
 {
@@ -158,36 +158,23 @@ int Board::manhattanDist(const Board& goal) const
 }
 
 // Returns true if the goal state is reachable
-// from the start state or false otherwise
+// from the start state or false otherwise.
 bool Board::isSolvable(const Board& goal) const
-{    
-    int b[(size*size)+1];
-    int ib[(size*size)+1];
-    int bInv[(size*size)+1];
-    int numInv = 0;
-    
+{
+    int *bInv = new int[size*size+1];
+    int *newStart = new int[size*size+1];
+
+    // build inverted function
+    for (int i=0; i<size*size; ++i)
+	bInv[ goal.arr[i/size][i%size] ] = i+1;
+
+    // build new start board by applying the inverted
+    // function to the original start board
     for (int i=0; i<size*size; i++)
-    {
-	b[i+1] = goal.arr[i/size][i%size] == 0 ? size*size : goal.arr[i/size][i%size];
-	ib[b[i+1]] = i+1;
-    }
+	newStart[i] = bInv[ arr[i/size][i%size] ];
 
-    for (int i=1; i<=size*size; i++)
-    {
-	int valueArr = arr[(i-1)/size][(i-1)%size];
-	if (valueArr == 0)
-	{
-	    bInv[i] = ib[size*size];
-	    // Compensation for the number of inversions due to
-	    // the blank square represented by size*size
-	    numInv -= (size*size)-i;
-	}
-	else
-	    bInv[i] = ib[valueArr];
-    }
+    int numInv = invCount(newStart, 0, size*size-1);
     
-    numInv += invCount(bInv, 1, size*size);
-
     return ( !IS_EVEN(size) && IS_EVEN(numInv) ) ||
            ( IS_EVEN(size) && ( (IS_EVEN(numInv) && !IS_EVEN(blankX)) || (!IS_EVEN(numInv) && IS_EVEN(blankX)) ) );
 }
@@ -196,12 +183,11 @@ bool Board::isSolvable(const Board& goal) const
 // read board and find the blank (x,y) position
 istream& operator>>(istream& is, Board& b)
 {
-
     for(int i=0; i<b.size; ++i)
 	for(int j=0; j<b.size; ++j)
 	{
 	    is >> b.arr[i][j];
-
+	    
 	    // blank?
 	    if(b.arr[i][j] == 0)
 	    {
@@ -222,7 +208,7 @@ ostream& operator<<(ostream& os, const Board& b)
 	for(int j=0; j<b.size; ++j)
 	    cout << setw(2) << b.arr[i][j] << " ";
 	cout << endl;
-  }
+    }
 
     return os;
 }
@@ -234,53 +220,60 @@ bool Board::isIn(int x, int y) const
     return x >= 0 && x < size && y >= 0 && y < size;
 }
 
-// Counts the number of inversions using mergesort O(log n)
-
-int Board::invCount(int *bInv, int lo, int hi) const
+// Array inversion count function.
+// It uses the MergeSort algorithm O(log n)
+int Board::invCount(int *v, int lo, int hi) const
 {
     int count = 0;
     
     if (lo<hi)
     {
         int mid = lo+(hi-lo)/2;
-        count += invCount(bInv, lo, mid);
-        count += invCount(bInv, mid+1, hi);
-        count += merge(bInv, lo, mid, hi);
+        count += invCount(v, lo, mid);
+        count += invCount(v, mid+1, hi);
+        count += invCountMerge(v, lo, mid, hi);
     }
     
     return count;
 }
 
+// A slighlty changed merge function from MergeSort.
 // Instead of merging two parts of the list, it counts the
 // number of inversions that he would have made by merging
-// them and maintaining the resulting list in order
-int Board::merge(int *bInv, int lo, int mid, int hi) const
-{   
-    int count=0, i, p1, p2, aux[hi+1];
-
-    p1 = lo;    
-    p2 = mid+1; 
-    i = lo;
+// them and maintaining the resulting list in order.
+int Board::invCountMerge(int *v, int lo, int mid, int hi) const
+{
+    int count=0, p1=lo, cur=lo, p2=mid+1, aux[hi+1];
     
-    while (p1 <= mid && p2 <= hi)
+    while(p1 <= mid && p2 <= hi)
     {
-        if (bInv[p1] <= bInv[p2])
-            aux[i++] = bInv[p1++];
+        if(v[p1] <= v[p2])
+            aux[cur++] = v[p1++];
         else
-        {
-            aux[i++] = bInv[p2++];
-	    count += mid-p1+1;
+        {	    
+            aux[cur++] = v[p2++];
+
+	    // ignore the number size*size invertions
+	    // there are 2 cases, either:
+	    //   v[p1] > v[p2] and v[p1] == size*size                            =>    ignore inversion
+	    //   v[p1] > v[p2] and v[p1] != size*size BUT v[mid] == size*size    =>    subtract 1 inversion from count
+	    if(v[p1] != size*size)
+	    {
+		count += mid-p1+1;
+		if(v[mid] == size*size)
+		    count--;
+	    }
         }
     }
     
     while (p1 <= mid)
-	aux[i++] = bInv[p1++];
+	aux[cur++] = v[p1++];
 
     while (p2 <= hi)
-	aux[i++] = bInv[p2++];
-    
-    for (i=lo; i<=hi; i++)
-	bInv[i] = aux[i];
+	aux[cur++] = v[p2++];
+
+    for(int i=lo; i<=hi; ++i)
+	v[i] = aux[i];
 
     return count;
 }

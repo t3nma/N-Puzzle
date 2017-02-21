@@ -45,11 +45,11 @@ bool NPuzzle::isSolvable() const
 void NPuzzle::init()
 {
     Board s(N);
-    cout << "Insira a configuração inicial: (" << N << "x" << N << ")" << endl;
+    cout << "Insert the start configuration: (" << N << "x" << N << ")" << endl;
     cin >> s;
 
     Board e(N);
-    cout << "\nInsira a configuração final: (" << N << "x" << N << ")" << endl;
+    cout << "\nInsert the end configuration: (" << N << "x" << N << ")" << endl;
     cin >> e;
 
     startConfig = new Configuration(s);
