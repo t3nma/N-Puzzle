@@ -28,6 +28,10 @@ public:
     /* getters */
     int **getArr() const;
 
+    /* setters */
+    void setBlankX(int blankX) const;
+    void setBlankY(int blankY) const;
+    
     /* util */
     vector<Board> makeDescendants();
     int manhattanDist(const Board& goal) const;

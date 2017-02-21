@@ -115,6 +115,20 @@ int** Board::getArr() const
     return arr;
 }
 
+// blankX setter
+void Board::setBlankX(int blankX) const
+{
+    this->blankX = blankX;
+}
+
+// blankY setter
+void Board::setBlankY(int blankY) const
+{
+    this->blankY = blankY;
+}
+
+void 
+
 // return board descendants which are
 // consequence of the blank piece allowed movements
 vector<Board> Board::makeDescendants()
@@ -133,6 +147,9 @@ vector<Board> Board::makeDescendants()
             b[blankX][blankY] = arr[newBlankX][newBlankY];
             b[newBlankX][newBlankY] = arr[blankX][blankY];
 
+	    newBoard.setBlankX(newBlankX);
+	    newBoard.setBlankY(newBlankY);
+	    
 	    descendants.push_back(newBoard);
 	}
     }
