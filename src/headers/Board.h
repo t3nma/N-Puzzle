@@ -29,8 +29,8 @@ public:
     int **getArr() const;
 
     /* setters */
-    void setBlankX(int blankX) const;
-    void setBlankY(int blankY) const;
+    void setBlankX(int blankX);
+    void setBlankY(int blankY);
     
     /* util */
     vector<Board> makeDescendants();

@@ -116,18 +116,16 @@ int** Board::getArr() const
 }
 
 // blankX setter
-void Board::setBlankX(int blankX) const
+void Board::setBlankX(int blankX)
 {
     this->blankX = blankX;
 }
 
 // blankY setter
-void Board::setBlankY(int blankY) const
+void Board::setBlankY(int blankY)
 {
     this->blankY = blankY;
 }
-
-void 
 
 // return board descendants which are
 // consequence of the blank piece allowed movements
