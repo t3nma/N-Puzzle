@@ -13,9 +13,9 @@ int main(int argc, char *argv[])
     {
 	// validate input
 	istringstream ss(argv[1]);
-	if( !(ss >> N) )
+	if( !(ss >> N) || N < 2 )
 	{
-	    cerr << "Invalid number!\nUsage >> ./a.out {size}" << endl;
+	    cerr << "Invalid number!\nUsage >> ./a.out {size >= 2}" << endl;
 	    return 1;
 	}
     }
@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
 	cout << "IS SOLVABLE :)\n";
     else
 	cout << "IS NOT SOLVABLE :(\n";
+
+    p.Astar();
     
     return 0;
 }

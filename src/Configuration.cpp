@@ -5,7 +5,13 @@
 #include "headers/Configuration.h"
 using namespace std;
 
-// constructor
+// default constructor
+Configuration::Configuration()
+{
+    
+}
+
+// all-member constructor
 Configuration::Configuration(const Board& state, int depth, Configuration* parent)
     : state(state), depth(depth), parent(parent)
 { }
@@ -48,6 +54,11 @@ int Configuration::cost(bool greedy, const Configuration& goal) const
 {
     int dx = state.manhattanDist(goal.state);
     return greedy ? dx : depth + dx;
+}
+
+int Configuration::getDepth() const
+{
+    return depth;
 }
 
 ostream& operator<<(ostream& os, const Configuration& c)

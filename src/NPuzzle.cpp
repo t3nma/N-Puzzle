@@ -3,6 +3,7 @@
  */
 
 #include "headers/NPuzzle.h"
+#include "headers/SearchAlgorithm.h"
 using namespace std;
 
 // constructor
@@ -22,15 +23,26 @@ NPuzzle::~NPuzzle()
 // A* search implementation
 void NPuzzle::Astar() const
 {
-    cout << *startConfig << endl;
-    cout << *goalConfig << endl;
+    SearchAlgorithm astar(SearchAlgorithm.ASTAR);
+    astar.search();
 }
 
 // Greedy search implementation
 void NPuzzle::greedy() const
 {
-    // TODO
     return;
+}
+
+void NPuzzle::IDFS() const
+{
+    /*
+    SearchAlgorithm idfs(SearchAlgorithm.IDFS);
+    for(int i=0; i<?; ++i)
+	{
+	    idfs.setDepthLimit(i);
+	    idfs.search();
+	}
+    */
 }
 
 // check if its possible to solve the puzzle

@@ -15,7 +15,8 @@ using namespace std;
 class Configuration
 {
 public:
-    Configuration(const Board& state, int depth=1, Configuration* parent=NULL);
+    Configuration();
+    Configuration(const Board& state, int depth=0, Configuration* parent=NULL);
     Configuration(const Configuration& c);
     Configuration& operator=(const Configuration& c);
     
@@ -24,6 +25,9 @@ public:
     bool isSolvable(const Configuration& goal) const;
     int cost(bool greedy, const Configuration& goal) const;
 
+    /* getters */
+    int getDepth() const;
+    
     /* operator overloading */
     friend ostream& operator<<(ostream& os, const Configuration& c);
     

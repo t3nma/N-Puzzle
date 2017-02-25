@@ -1,6 +1,14 @@
+/*
+ * NPuzzle.h
+ *
+ * NPuzzle model its definition, member-functions
+ * implemented in NPuzzle.cpp
+ */
+
 #ifndef NPUZZLE_H
 #define NPUZZLE_H
 
+#include "AstarSearch.h"
 #include "Configuration.h"
 using namespace std;
 
@@ -22,7 +30,6 @@ private:
     Configuration *startConfig;
     Configuration *goalConfig;
 
-    /* methods */
     void init();
 };
 
