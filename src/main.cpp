@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     int N=4;
-
+    
     if(argc == 1)
 	cout << "Puzzle size not provided, assuming size 4..." << endl << endl;
     else
@@ -23,11 +23,9 @@ int main(int argc, char *argv[])
     NPuzzle p(N);
 
     if(p.isSolvable())
-	cout << "IS SOLVABLE :)\n";
+	p.Astar();
     else
-	cout << "IS NOT SOLVABLE :(\n";
-
-    p.Astar();
+	cout << "This instance of the problem is not solvable." << endl;
     
     return 0;
 }

@@ -13,20 +13,20 @@
 
 using namespace std;
 
-enum SearchType
-{
-    ASTAR,
-    GREEDY,
-    DFS,
-    BFS,
-    IDFS
-};
-
 class SearchAlgorithm
 {
 public:
 
-    SearchAlgorithm(SearchType searchType, const Configuration& startConfig, const Configuration& endConfig);
+    enum SearchType
+    {
+	ASTAR,
+	GREEDY,
+	DFS,
+	BFS,
+	IDFS
+    };
+    
+    SearchAlgorithm(int searchType, const Configuration& startConfig, const Configuration& goalConfig, int depthLimit=-1);
     
     /* queuing functions */
     void enqueue(const Configuration& c);
@@ -34,15 +34,12 @@ public:
 
     // general search algorithm
     void search();
-
-    // setters
-    void setDepthLimit(int depthLimit);
     
 private:
     priority_queue<NODE, vector<NODE>, PQComparator> q;
-    SearchType searchType;
+    int searchType;
     Configuration startConfig;
-    Configuration endConfig;
+    Configuration goalConfig;
     int depthLimit;
 };
 

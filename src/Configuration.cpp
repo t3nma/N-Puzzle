@@ -5,29 +5,19 @@
 #include "headers/Configuration.h"
 using namespace std;
 
-// default constructor
-Configuration::Configuration()
-{
-    
-}
-
 // all-member constructor
-Configuration::Configuration(const Board& state, int depth, Configuration* parent)
-    : state(state), depth(depth), parent(parent)
+Configuration::Configuration(const Board& state, int depth)
+    : state(state), depth(depth)
 { }
 
 // copy constructor
 Configuration::Configuration(const Configuration& c)
-    : state(c.state), depth(c.depth), parent(c.parent)
+    : state(c.state), depth(c.depth)
 { }
 
 // = operation support
 Configuration& Configuration::operator=(const Configuration& c)
 {
-    Configuration *newPtr = c.parent;
-    delete parent;
-    parent = newPtr;
-    
     state = c.state;
     depth = c.depth;
 
@@ -40,7 +30,7 @@ vector<Configuration> Configuration::makeDescendants()
     vector<Board> stateDescendants = state.makeDescendants();
 
     for(vector<Board>::iterator it = stateDescendants.begin(); it!=stateDescendants.end(); ++it)
-	descendants.push_back( Configuration(*it, depth+1, this) );
+	descendants.push_back( Configuration(*it, depth+1) );
     
     return descendants;	    
 }
@@ -68,4 +58,9 @@ ostream& operator<<(ostream& os, const Configuration& c)
     os << "State: \n" << c.state << endl << endl;
     
     return os;
+}
+
+bool Configuration::operator==(const Configuration& c)
+{
+    return state.manhattanDist(c.state) == 0;
 }

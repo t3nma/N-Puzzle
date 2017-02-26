@@ -7,9 +7,9 @@
 
 struct PQComparator
 {   
-    bool operator[](const NODE& lhs, const NODE& rhs)
+    bool operator()(const NODE& lhs, const NODE& rhs)
     {
-        return lhs.first < rhs.first;
+        return lhs.first >= rhs.first;
     }
 };
 

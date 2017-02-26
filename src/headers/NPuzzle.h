@@ -8,7 +8,6 @@
 #ifndef NPUZZLE_H
 #define NPUZZLE_H
 
-#include "AstarSearch.h"
 #include "Configuration.h"
 using namespace std;
 

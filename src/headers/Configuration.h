@@ -15,8 +15,7 @@ using namespace std;
 class Configuration
 {
 public:
-    Configuration();
-    Configuration(const Board& state, int depth=0, Configuration* parent=NULL);
+    Configuration(const Board& state, int depth=0);
     Configuration(const Configuration& c);
     Configuration& operator=(const Configuration& c);
     
@@ -30,11 +29,11 @@ public:
     
     /* operator overloading */
     friend ostream& operator<<(ostream& os, const Configuration& c);
+    bool operator==(const Configuration& c);
     
 private:
     Board state;
     int depth;
-    Configuration *parent;
 };
 
 #endif

@@ -23,27 +23,28 @@ NPuzzle::~NPuzzle()
 // A* search implementation
 void NPuzzle::Astar() const
 {
-    SearchAlgorithm astar(SearchAlgorithm.ASTAR);
+    SearchAlgorithm astar(SearchAlgorithm::ASTAR, *startConfig, *goalConfig);
     astar.search();
 }
 
 // Greedy search implementation
 void NPuzzle::greedy() const
 {
-    return;
+    SearchAlgorithm greedy(SearchAlgorithm::GREEDY, *startConfig, *goalConfig);
+    greedy.search();
 }
 
+/*
 void NPuzzle::IDFS() const
 {
-    /*
     SearchAlgorithm idfs(SearchAlgorithm.IDFS);
     for(int i=0; i<?; ++i)
 	{
 	    idfs.setDepthLimit(i);
 	    idfs.search();
 	}
-    */
 }
+*/
 
 // check if its possible to solve the puzzle
 // with its current configurations
