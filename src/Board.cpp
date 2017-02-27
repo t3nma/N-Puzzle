@@ -56,8 +56,8 @@ const int Board::MOVES_X[] = {1, 0, -1, 0};
 const int Board::MOVES_Y[] = {0, 1, 0, -1};
 
 // 1-param constructor
-Board::Board(int size)
-    : arr(new int*[size]), size(size), blankX(-1), blankY(-1)
+Board::Board(int size, int move)
+    : arr(new int*[size]), size(size), blankX(-1), blankY(-1), move(move)
 {
     for(int i=0; i<size; ++i)
 	arr[i] = new int[size];
@@ -65,7 +65,7 @@ Board::Board(int size)
 
 // copy constructor
 Board::Board(const Board& b)
-    : arr(new int*[b.size]), size(b.size), blankX(b.blankX), blankY(b.blankY)
+    : arr(new int*[b.size]), size(b.size), blankX(b.blankX), blankY(b.blankY), move(b.move)
 {   
     for (int i=0; i<size; i++)
     {
@@ -97,7 +97,8 @@ Board& Board::operator=(const Board& b)
     size = b.size;
     blankX = b.blankX;
     blankY = b.blankY;
-
+    move = b.move;
+    
     return *this;
 }
 
@@ -132,23 +133,35 @@ void Board::setBlankY(int blankY)
 vector<Board> Board::makeDescendants()
 {
     vector<Board> descendants;
+
+    int ignore = -1;
+    switch(move)
+    {
+    case 0: ignore = 2; break;
+    case 1: ignore = 3; break;
+    case 2: ignore = 0; break;
+    case 3: ignore = 1; break;
+    }
     
     for(int m=0; m<4; m++)
     {
-	Board newBoard = (*this);
-        int newBlankX = blankX+MOVES_X[m];
-        int newBlankY = blankY+MOVES_Y[m];
+	if(m != ignore)
+	{
+	    Board newBoard = (*this);
+	    int newBlankX = blankX+MOVES_X[m];
+	    int newBlankY = blankY+MOVES_Y[m];
 	
-        if( isIn(newBlankX,newBlankY) )
-        {    
-	    int **b = newBoard.getArr();
-            b[blankX][blankY] = arr[newBlankX][newBlankY];
-            b[newBlankX][newBlankY] = arr[blankX][blankY];
-
-	    newBoard.setBlankX(newBlankX);
-	    newBoard.setBlankY(newBlankY);
-	    
-	    descendants.push_back(newBoard);
+	    if( isIn(newBlankX,newBlankY) )
+	    {    
+		int **b = newBoard.getArr();
+		b[blankX][blankY] = arr[newBlankX][newBlankY];
+		b[newBlankX][newBlankY] = arr[blankX][blankY];
+		
+		newBoard.setBlankX(newBlankX);
+		newBoard.setBlankY(newBlankY);
+		
+		descendants.push_back(newBoard);
+	    }
 	}
     }
     
