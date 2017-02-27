@@ -31,6 +31,7 @@ public:
     /* setters */
     void setBlankX(int blankX);
     void setBlankY(int blankY);
+    void setMove(int move);
     
     /* util */
     vector<Board> makeDescendants();

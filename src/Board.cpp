@@ -122,6 +122,12 @@ void Board::setBlankX(int blankX)
     this->blankX = blankX;
 }
 
+// move setter
+void Board::setMove(int move)
+{
+  this->move = move;
+}
+
 // blankY setter
 void Board::setBlankY(int blankY)
 {
@@ -159,6 +165,7 @@ vector<Board> Board::makeDescendants()
 		
 		newBoard.setBlankX(newBlankX);
 		newBoard.setBlankY(newBlankY);
+                newBoard.setMove(m);
 		
 		descendants.push_back(newBoard);
 	    }

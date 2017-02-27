@@ -4,7 +4,7 @@
 
 #include "headers/SearchAlgorithm.h"
 #include <utility>
-
+#include <cstdio>
 SearchAlgorithm::SearchAlgorithm(int searchType, const Configuration& startConfig, const Configuration& goalConfig, int depthLimit)
     : searchType(searchType), startConfig(startConfig), goalConfig(goalConfig), depthLimit(depthLimit)
 { }
@@ -14,6 +14,7 @@ void SearchAlgorithm::enqueue(const Configuration& c)
     switch(searchType)
     {
         case ASTAR:
+          //cout << "enqueuing with cost: " << c.cost(false,goalConfig) << endl;
 	    q.push( make_pair( c.cost(false,goalConfig),c ) );
 	    break;
         case GREEDY:
@@ -48,6 +49,9 @@ void SearchAlgorithm::search()
     {
 	NODE nextNode = q.top(); q.pop();
 
+        //getchar();
+        //cout << "F(x) = " << nextNode.first << endl << nextNode.second << endl;
+        if (nextNode.second.getDepth() > 30 ) cout << nextNode.second.getDepth() << endl;
 	if(nextNode.second == goalConfig)
 	{
 	    cout << "Found solution @ depth " << nextNode.second.getDepth() << endl;
