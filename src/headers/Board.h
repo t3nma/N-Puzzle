@@ -20,7 +20,7 @@ public:
     static const int MOVES_X[];
     static const int MOVES_Y[];
 
-    Board(int size);
+    Board(int size, int move=-1);
     Board(const Board& b);
     Board& operator=(const Board& b);
     ~Board();
@@ -46,6 +46,7 @@ private:
     int size;
     int blankX;
     int blankY;
+    int move;
     
     bool isIn(int x, int y) const;
     int invCount(int *v, int lo, int hi) const;
