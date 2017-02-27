@@ -1,20 +1,20 @@
-n-puzzle: Node.o List.o MakeDescendants.o main.o
-	gcc -o n-puzzle main.o Node.o List.o MakeDescendants.o -Wall
+N-Puzzle: main.o NPuzzle.o SearchAlgorithm.o Configuration.o Board.o
+	g++ -o N-Puzzle main.o NPuzzle.o SearchAlgorithm.o Configuration.o Board.o -Wall
 
-main.o: main.cpp
+main.o: main.cpp Board.cpp Configuration.cpp SearchAlgorithm.cpp NPuzzle.cpp headers/Board.h headers/Configuration.h headers/SearchAlgorithm.h headers/NPuzzle.h
 	g++ -c main.cpp -Wall
 
-NPuzzle.o: NPuzzle.cpp
-	   g++ -c NPuzzle.cpp -Wall
+NPuzzle.o: NPuzzle.cpp Board.cpp Configuration.cpp SearchAlgorithm.cpp headers/Board.h headers/Configuration.h headers/SearchAlgorithm.h
+	g++ -c NPuzzle.cpp -Wall
 
-MakeDescendants.o: MakeDescendants.c Node.c List.c
-	gcc -c MakeDescendants.c -Wall
+SearchAlgorithm.o: SearchAlgorithm.cpp Configuration.cpp headers/PQComparator.h
+	g++ -c SearchAlgorithm.cpp -Wall
 
-List.o: List.c Node.c
-	gcc -c List.c -Wall
+Configuration.o: Configuration.cpp Board.cpp headers/Configuration.h headers/Board.h
+	g++ -c Configuration.cpp -Wall
 
-Node.o: Node.c
-	gcc -c Node.c -Wall
+Board.o: Board.cpp headers/Board.h
+	g++ -c Board.cpp -Wall
 
 clean:
-	rm -f *~ *.o
+	rm -f N-Puzzle *~ *.o *\#
