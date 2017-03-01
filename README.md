@@ -1,5 +1,5 @@
 # N-Puzzle
-An **Artificial Intelligence** university work that focus on the study and implementation of search algorithms and their applience in the famous N-Puzzle game.
+An **Artificial Intelligence** university work that focus on the study and implementation of search algorithms and their appliance in the famous N-Puzzle game.
 
 
 <h2> Usage </h2>
