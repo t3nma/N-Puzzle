@@ -5,34 +5,40 @@
 #include "headers/SearchAlgorithm.h"
 #include <utility>
 #include <cstdio>
-SearchAlgorithm::SearchAlgorithm(int searchType, const Configuration& startConfig, const Configuration& goalConfig, int depthLimit)
-    : searchType(searchType), startConfig(startConfig), goalConfig(goalConfig), depthLimit(depthLimit)
+
+// constructor
+SearchAlgorithm::SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType)
+    : startConfig(startConfig),
+      goalConfig(goalConfig),
+      searchType(searchType)
 { }
 
 void SearchAlgorithm::enqueue(const Configuration& c)
-{
+{   
+    int cost = 0;    
     switch(searchType)
     {
         case ASTAR:
-          //cout << "enqueuing with cost: " << c.cost(false,goalConfig) << endl;
-	    q.push( make_pair( c.cost(false,goalConfig),c ) );
-	    break;
+	    cost = c.cost(false,goalConfig); break;
         case GREEDY:
-	    q.push( make_pair( c.cost(true,goalConfig),c ) );
-	    break;
+	    cost = c.cost(true,goalConfig); break;
         case DFS:
-	    q.push( make_pair(0,c) );
-	    break;
+	    cost = -1*c.getDepth(); break;
         case BFS:
-	    q.push( make_pair(c.getDepth(),c) );
-	    break;
+	    cost = c.getDepth(); break;
         case IDFS:
-	    if( c.getDepth() <= depthLimit )
-		q.push( make_pair(0,c) );
-	    break;
+	    if(c.getDepth() > depthLimit)
+		return;
+	    cost = -1*c.getDepth(); break;
         default:
 	    return;
     }
+
+    #ifdef DEBUG
+        cout << "enqueing with cost: " << cost << endl;
+    #endif
+
+    q.push( make_pair(cost,c) );
 }
 
 void SearchAlgorithm::enqueueAll(const vector<Configuration>& cList)
@@ -41,25 +47,38 @@ void SearchAlgorithm::enqueueAll(const vector<Configuration>& cList)
 	enqueue(cList[i]);
 }
 
-void SearchAlgorithm::search()
+bool SearchAlgorithm::search()
 {   
     enqueue(startConfig);
     
     while(!q.empty())
     {
-	NODE nextNode = q.top(); q.pop();
+	NODE node = q.top(); q.pop();
 
-        //getchar();
-        //cout << "F(x) = " << nextNode.first << endl << nextNode.second << endl;
-        if (nextNode.second.getDepth() > 30 ) cout << nextNode.second.getDepth() << endl;
-	if(nextNode.second == goalConfig)
+	#ifdef DEBUG
+	    getchar();
+	    cout << "top: (f,d) = (" << node.first << "," << node.second.getDepth() <<  ")" << endl;
+	#endif
+	
+	if(node.second == goalConfig)
 	{
-	    cout << "Found solution @ depth " << nextNode.second.getDepth() << endl;
-	    return;
+	    cout << "Found solution with depth " << node.second.getDepth() << endl;
+	    return true;
 	}
 	
-	enqueueAll(nextNode.second.makeDescendants());
+	enqueueAll(node.second.makeDescendants());
     }
 
     cout << "Solution not found!" << endl;
+    return false;
+}
+
+void SearchAlgorithm::iterativeSearch()
+{   
+    depthLimit=0;
+    while(!search())
+    {
+	depthLimit++;
+	cout << "searching with limit: " << depthLimit << endl;
+    }
 }

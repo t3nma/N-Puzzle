@@ -5,51 +5,9 @@
 #include "headers/Board.h"
 #include <cstdlib>
 #include <iomanip>
+
 using namespace std;
 
-// SIZE = 3
-//
-//    0 1 2
-// 0 |1|2|3|
-// 1 |4|5|6|
-// 2 |7|8|0|
-//
-// for merge sort
-// i index
-// m[i/size][i%size]
-//
-//  0 1 2 3 4 5 6 7 8
-// |1|2|3|4|5|6|7|8|0
-
-
-// SIZE=2
-//
-// INICIAL
-//    0 1
-// 0 |2|1|
-// 1 |3|4|
-//
-// FINAL
-//    0 1
-// 0 |3|1|
-// 1 |4|2|
-//
-//  0 1 2 3 4
-// | |3|1|4|2| = b
-// INICIAL[b[i]] = i;
-//
-// i==1 := INICIAL[b[i]->3]=i
-// i==2 := INICIAL[b[i]->1]=i
-//
-// bINICIAL
-//    0 1
-// 0 |4|2|
-// 1 |1|3|
-//
-// bFINAL
-//    0 1
-// 0 |1|2|
-// 1 |3|4|
 
 // allowed movements for the blank board piece
 const int Board::MOVES_X[] = {1, 0, -1, 0};

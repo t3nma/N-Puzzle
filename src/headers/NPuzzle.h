@@ -18,9 +18,12 @@ public:
     ~NPuzzle();
 
     /* search methods */
-    void Astar() const;
-    void greedy() const;
-
+    void searchAstar() const;
+    void searchGreedy() const;
+    void searchDFS() const;
+    void searchBFS() const;
+    void searchIDFS() const;
+    
     /* util */
     bool isSolvable() const;
     

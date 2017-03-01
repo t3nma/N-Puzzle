@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
     }
     
     NPuzzle p(N);
-
+    
     if(p.isSolvable())
-	p.Astar();
+	p.searchIDFS();
     else
 	cout << "This instance of the problem is not solvable." << endl;
     

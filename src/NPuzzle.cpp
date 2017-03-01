@@ -4,7 +4,9 @@
 
 #include "headers/NPuzzle.h"
 #include "headers/SearchAlgorithm.h"
+
 using namespace std;
+
 
 // constructor
 NPuzzle::NPuzzle(int N)
@@ -21,30 +23,36 @@ NPuzzle::~NPuzzle()
 }
 
 // A* search implementation
-void NPuzzle::Astar() const
+void NPuzzle::searchAstar() const
 {
-    SearchAlgorithm astar(SearchAlgorithm::ASTAR, *startConfig, *goalConfig);
+    SearchAlgorithm astar(*startConfig, *goalConfig, SearchAlgorithm::ASTAR);
     astar.search();
 }
 
 // Greedy search implementation
-void NPuzzle::greedy() const
+void NPuzzle::searchGreedy() const
 {
-    SearchAlgorithm greedy(SearchAlgorithm::GREEDY, *startConfig, *goalConfig);
+    SearchAlgorithm greedy(*startConfig, *goalConfig, SearchAlgorithm::GREEDY);
     greedy.search();
 }
 
-/*
-void NPuzzle::IDFS() const
+void NPuzzle::searchDFS() const
 {
-    SearchAlgorithm idfs(SearchAlgorithm.IDFS);
-    for(int i=0; i<?; ++i)
-	{
-	    idfs.setDepthLimit(i);
-	    idfs.search();
-	}
+    SearchAlgorithm dfs(*startConfig, *goalConfig, SearchAlgorithm::DFS);
+    dfs.search();
 }
-*/
+
+void NPuzzle::searchBFS() const
+{
+    SearchAlgorithm bfs(*startConfig, *goalConfig, SearchAlgorithm::BFS);
+    bfs.search();
+}
+
+void NPuzzle::searchIDFS() const
+{
+    SearchAlgorithm idfs(*startConfig, *goalConfig, SearchAlgorithm::IDFS);
+    idfs.iterativeSearch();
+}
 
 // check if its possible to solve the puzzle
 // with its current configurations

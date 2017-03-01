@@ -8,7 +8,7 @@
 #define NODE pair<int,Configuration>
 
 #include "Configuration.h"
-#include "PQComparator.h"
+#include "HeapComparator.h"
 #include <queue>
 
 using namespace std;
@@ -26,20 +26,21 @@ public:
 	IDFS
     };
     
-    SearchAlgorithm(int searchType, const Configuration& startConfig, const Configuration& goalConfig, int depthLimit=-1);
+    SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType);
     
     /* queuing functions */
     void enqueue(const Configuration& c);
     void enqueueAll(const vector<Configuration>& cList);
 
     // general search algorithm
-    void search();
+    bool search();
+    void iterativeSearch();
     
 private:
-    priority_queue<NODE, vector<NODE>, PQComparator> q;
-    int searchType;
+    priority_queue<NODE, vector<NODE>, HeapComparator> q;
     Configuration startConfig;
     Configuration goalConfig;
+    int searchType;
     int depthLimit;
 };
 
