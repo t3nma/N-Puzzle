@@ -1,6 +1,8 @@
 # N-Puzzle
-A research and implementation project about the N-Puzzle game.
+An **Artificial Intelligence** university work that focus on the study and implementation of search algorithms and their applience in the famous N-Puzzle game.
 
-Run 'make' to compile. It will create an executable file 'N-Puzzle'. To run the executable write './N-Puzzle size-of-board'. The default board size is 4, which is the length of its the side.
 
-Run 'make clean' to remove executables and object files.
+<h1> Usage
+1. From the project source directory, run `make` to compile the program.
+2. Run `./N-Puzzle {board-size}` to execute. If not especified, the default board size (side length) is 4.
+3. (Optional) Run `make clean` to remove all the executables and object files.
