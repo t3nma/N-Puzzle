@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     NPuzzle p(N);
     
     if(p.isSolvable())
-	p.searchIDFS();
+	p.searchBFS();
     else
 	cout << "This instance of the problem is not solvable." << endl;
     

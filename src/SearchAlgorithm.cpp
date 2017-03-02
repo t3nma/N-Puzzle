@@ -3,7 +3,9 @@
  */
 
 #include "headers/SearchAlgorithm.h"
+#include <iomanip>
 #include <utility>
+#include <ctime>
 #include <cstdio>
 
 // constructor
@@ -48,9 +50,12 @@ void SearchAlgorithm::enqueueAll(const vector<Configuration>& cList)
 }
 
 bool SearchAlgorithm::search()
-{   
-    enqueue(startConfig);
+{
+    struct timespec start, finish;
+    clock_gettime(CLOCK_MONOTONIC, &start);
     
+    enqueue(startConfig);
+
     while(!q.empty())
     {
 	NODE node = q.top(); q.pop();
@@ -62,7 +67,9 @@ bool SearchAlgorithm::search()
 	
 	if(node.second == goalConfig)
 	{
-	    cout << "Found solution with depth " << node.second.getDepth() << endl;
+	    clock_gettime(CLOCK_MONOTONIC, &finish);
+	    double elapsed = (finish.tv_sec - start.tv_sec) + ((finish.tv_nsec - start.tv_nsec)/1000000000.0);
+	    cout << setprecision(2) << "Found solution with depth " << node.second.getDepth() << endl << "Time " << elapsed << " seconds" << endl;
 	    return true;
 	}
 	
