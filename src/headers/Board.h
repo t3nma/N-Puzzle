@@ -50,8 +50,6 @@ private:
     int move;
     
     bool isIn(int x, int y) const;
-    int invCount(int *v, int lo, int hi) const;
-    int invCountMerge(int *v, int lo, int mid, int hi) const;
 };
 
 #endif

@@ -101,10 +101,10 @@ vector<Board> Board::makeDescendants()
     int ignore = -1;
     switch(move)
     {
-    case 0: ignore = 2; break;
-    case 1: ignore = 3; break;
-    case 2: ignore = 0; break;
-    case 3: ignore = 1; break;
+        case 0: ignore = 2; break;
+        case 1: ignore = 3; break;
+        case 2: ignore = 0; break;
+        case 3: ignore = 1; break;
     }
     
     for(int m=0; m<4; m++)
@@ -154,22 +154,21 @@ int Board::manhattanDist(const Board& goal) const
 // from the start state or false otherwise.
 bool Board::isSolvable(const Board& goal) const
 {
-    int *bInv = new int[size*size+1];
-    int *newStart = new int[size*size+1];
+    int invS = 0, invG = 0;
 
-    // build inverted function
-    for (int i=0; i<size*size; ++i)
-	bInv[ goal.arr[i/size][i%size] ] = i+1;
-
-    // build new start board by applying the inverted
-    // function to the original start board
     for (int i=0; i<size*size; i++)
-	newStart[i] = bInv[ arr[i/size][i%size] ];
-
-    int numInv = invCount(newStart, 0, size*size-1);
+	for (int j=i+1; j<size*size; j++)
+	{
+	    if(arr[j/size][j%size] != 0 && arr[i/size][i%size] > arr[j/size][j%size])
+		invS++;
+	    if(goal.arr[j/size][j%size] != 0 && goal.arr[i/size][i%size] > goal.arr[j/size][j%size])
+		invG++;
+	}
     
-    return ( !IS_EVEN(size) && IS_EVEN(numInv) ) ||
-           ( IS_EVEN(size) && ( (IS_EVEN(numInv) && !IS_EVEN(blankX)) || (!IS_EVEN(numInv) && IS_EVEN(blankX)) ) );
+    bool lhs = (!IS_EVEN(size) && IS_EVEN(invS)) || ( IS_EVEN(size) && ( !IS_EVEN((size-blankX)) == IS_EVEN(invS) ) );
+    bool rhs = (!IS_EVEN(size) && IS_EVEN(invG)) || ( IS_EVEN(size) && ( !IS_EVEN((size-goal.blankX)) == IS_EVEN(invG) ) );
+    
+    return lhs == rhs;
 }
 
 // >> operator support
@@ -212,62 +211,3 @@ bool Board::isIn(int x, int y) const
 {
     return x >= 0 && x < size && y >= 0 && y < size;
 }
-
-// Array inversion count function.
-// It uses the MergeSort algorithm O(log n)
-int Board::invCount(int *v, int lo, int hi) const
-{
-    int count = 0;
-    
-    if (lo<hi)
-    {
-        int mid = lo+(hi-lo)/2;
-        count += invCount(v, lo, mid);
-        count += invCount(v, mid+1, hi);
-        count += invCountMerge(v, lo, mid, hi);
-    }
-    
-    return count;
-}
-
-// A slighlty changed merge function from MergeSort.
-// Instead of merging two parts of the list, it counts the
-// number of inversions that he would have made by merging
-// them and maintaining the resulting list in order.
-int Board::invCountMerge(int *v, int lo, int mid, int hi) const
-{
-    int count=0, p1=lo, cur=lo, p2=mid+1, aux[hi+1];
-    
-    while(p1 <= mid && p2 <= hi)
-    {
-        if(v[p1] <= v[p2])
-            aux[cur++] = v[p1++];
-        else
-        {	    
-            aux[cur++] = v[p2++];
-
-	    // ignore the number size*size invertions
-	    // there are 2 cases, either:
-	    //   v[p1] > v[p2] and v[p1] == size*size                            =>    ignore inversion
-	    //   v[p1] > v[p2] and v[p1] != size*size BUT v[mid] == size*size    =>    subtract 1 inversion from count
-	    if(v[p1] != size*size)
-	    {
-		count += mid-p1+1;
-		if(v[mid] == size*size)
-		    count--;
-	    }
-        }
-    }
-    
-    while (p1 <= mid)
-	aux[cur++] = v[p1++];
-
-    while (p2 <= hi)
-	aux[cur++] = v[p2++];
-
-    for(int i=lo; i<=hi; ++i)
-	v[i] = aux[i];
-
-    return count;
-}
-
