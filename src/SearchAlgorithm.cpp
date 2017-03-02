@@ -5,33 +5,32 @@
 #include "headers/SearchAlgorithm.h"
 #include <iomanip>
 #include <utility>
-#include <ctime>
 #include <cstdio>
 
 // constructor
 SearchAlgorithm::SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType)
-    : startConfig(startConfig),
-      goalConfig(goalConfig),
+    : startConfig(new Configuration(startConfig)),
+      goalConfig(new Configuration(goalConfig)),
       searchType(searchType)
 { }
 
-void SearchAlgorithm::enqueue(const Configuration& c)
+void SearchAlgorithm::enqueue(Configuration *c)
 {   
     int cost = 0;    
     switch(searchType)
     {
         case ASTAR:
-	    cost = c.cost(false,goalConfig); break;
+	    cost = c->cost(false,goalConfig); break;
         case GREEDY:
-	    cost = c.cost(true,goalConfig); break;
+	    cost = c->cost(true,goalConfig); break;
         case DFS:
-	    cost = -1*c.getDepth(); break;
+	    cost = -1*c->getDepth(); break;
         case BFS:
-	    cost = c.getDepth(); break;
+	    cost = c->getDepth(); break;
         case IDFS:
-	    if(c.getDepth() > depthLimit)
+	    if(c->getDepth() > depthLimit)
 		return;
-	    cost = -1*c.getDepth(); break;
+	    cost = -1*c->getDepth(); break;
         default:
 	    return;
     }
@@ -43,7 +42,7 @@ void SearchAlgorithm::enqueue(const Configuration& c)
     q.push( make_pair(cost,c) );
 }
 
-void SearchAlgorithm::enqueueAll(const vector<Configuration>& cList)
+void SearchAlgorithm::enqueueAll(const vector<Configuration*>& cList)
 {
     for(size_t i=0; i<cList.size(); i++)
 	enqueue(cList[i]);
@@ -56,24 +55,44 @@ bool SearchAlgorithm::search()
     
     enqueue(startConfig);
 
+    #ifdef DEBUG
+    cout << "Enqued startConfig, size: " << q.size() << endl;
+    #endif
+    
     while(!q.empty())
     {
 	NODE node = q.top(); q.pop();
 
 	#ifdef DEBUG
 	    getchar();
-	    cout << "top: (f,d) = (" << node.first << "," << node.second.getDepth() <<  ")" << endl;
+	    cout << "top: (f,d) = (" << node.first << "," << node.second->getDepth() <<  ")" << endl;
 	#endif
-	
-	if(node.second == goalConfig)
+	 
+	if(*node.second == *goalConfig)
 	{
 	    clock_gettime(CLOCK_MONOTONIC, &finish);
-	    double elapsed = (finish.tv_sec - start.tv_sec) + ((finish.tv_nsec - start.tv_nsec)/1000000000.0);
-	    cout << setprecision(2) << "Found solution with depth " << node.second.getDepth() << endl << "Time " << elapsed << " seconds" << endl;
+	    printSolution(node.second, &start, &finish);
+
+	    while(!q.empty())
+	    {
+		NODE n = q.top(); q.pop();
+		delete n.second;
+	    }
+	    
 	    return true;
 	}
-	
-	enqueueAll(node.second.makeDescendants());
+
+	enqueueAll(node.second->makeDescendants());
+
+	#ifdef DEBUG
+	cout << "Enqued descendants" << endl;
+	#endif
+
+	delete node.second;
+
+	#ifdef DEBUG
+	cout << "Node deleted" << endl;
+	#endif
     }
 
     cout << "Solution not found!" << endl;
@@ -88,4 +107,25 @@ void SearchAlgorithm::iterativeSearch()
 	depthLimit++;
 	cout << "searching with limit: " << depthLimit << endl;
     }
+}
+
+void SearchAlgorithm::printPath(Configuration *configPtr)
+{
+    if (configPtr == NULL)
+	return;
+    else
+    {
+	printPath(configPtr->getParent());
+	cout << configPtr->getState().getMove() << " ";
+    }
+}
+
+void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *start, struct timespec *finish)
+{
+    // time calculation
+    double elapsed = (finish->tv_sec - start->tv_sec) + ((finish->tv_nsec - start->tv_nsec)/1000000000.0);
+
+    cout << setprecision(2) << "Found solution: ";
+    printPath(solution);
+    cout << "with depth " << solution->getDepth() << " in " << elapsed << " seconds" << endl;
 }

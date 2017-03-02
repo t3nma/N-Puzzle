@@ -74,6 +74,12 @@ int** Board::getArr() const
     return arr;
 }
 
+// move getter
+int getMove() const
+{
+    return move;
+}
+
 // blankX setter
 void Board::setBlankX(int blankX)
 {

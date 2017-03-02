@@ -15,25 +15,29 @@ using namespace std;
 class Configuration
 {
 public:
-    Configuration(const Board& state, int depth=0);
+    Configuration(const Board& state, int depth=0, Configuration *parent=NULL);
     Configuration(const Configuration& c);
     Configuration& operator=(const Configuration& c);
     
     /* util */
-    vector<Configuration> makeDescendants();
-    bool isSolvable(const Configuration& goal) const;
-    int cost(bool greedy, const Configuration& goal) const;
+    vector<Configuration*> makeDescendants();
+    bool isSolvable(const Configuration* goal) const;
+    int cost(bool greedy, const Configuration* goal) const;
 
     /* getters */
     int getDepth() const;
+    Board getState() const;
+    Configuration *getParent() const;
     
     /* operator overloading */
     friend ostream& operator<<(ostream& os, const Configuration& c);
     bool operator==(const Configuration& c);
+
     
 private:
     Board state;
     int depth;
+    Configuration *parent;
 };
 
 #endif

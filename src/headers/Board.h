@@ -9,6 +9,7 @@
 #define BOARD_H
 #define IS_EVEN(N) (N%2 == 0)
 
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -27,7 +28,8 @@ public:
 
     /* getters */
     int **getArr() const;
-
+    int getMove() const;
+    
     /* setters */
     void setBlankX(int blankX);
     void setBlankY(int blankY);

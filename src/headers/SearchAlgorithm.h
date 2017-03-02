@@ -5,11 +5,12 @@
 #ifndef SEARCHALGORITHM_H
 #define SEARCHALGORITHM_H
 
-#define NODE pair<int,Configuration>
+#define NODE pair<int,Configuration*>
 
 #include "Configuration.h"
 #include "HeapComparator.h"
 #include <queue>
+#include <ctime>
 
 using namespace std;
 
@@ -29,8 +30,8 @@ public:
     SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType);
     
     /* queuing functions */
-    void enqueue(const Configuration& c);
-    void enqueueAll(const vector<Configuration>& cList);
+    void enqueue(Configuration *c);
+    void enqueueAll(const vector<Configuration*>& cList);
 
     // general search algorithm
     bool search();
@@ -38,10 +39,13 @@ public:
     
 private:
     priority_queue<NODE, vector<NODE>, HeapComparator> q;
-    Configuration startConfig;
-    Configuration goalConfig;
+    Configuration *startConfig;
+    Configuration *goalConfig;
     int searchType;
     int depthLimit;
+
+    void printPath(Configuration *configPtr);
+    void printSolution(Configuration *solution, struct timespec *start, struct timespec *finish);
 };
 
 #endif
