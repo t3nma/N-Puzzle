@@ -64,16 +64,20 @@ bool SearchAlgorithm::search()
 	NODE node = q.top(); q.pop();
 
 	#ifdef DEBUG
-	    getchar();
-	    cout << "top: (f,d) = (" << node.first << "," << node.second->getDepth() <<  ")" << endl;
+        getchar();
+        cout << "top: (f,d) = (" << node.first << "," << node.second->getDepth() <<  ")" << endl;
 	#endif
 	 
 	if(*node.second == *goalConfig)
 	{
 	    clock_gettime(CLOCK_MONOTONIC, &finish);
-	    printSolution(node.second, &start, &finish);
+            #ifdef DEBUG
+            cout << "Going to print the solution..." << endl;
+            #endif 
 
-	    while(!q.empty())
+            printSolution(node.second, &start, &finish);
+
+            while(!q.empty())
 	    {
 		NODE n = q.top(); q.pop();
 		delete n.second;
@@ -111,21 +115,37 @@ void SearchAlgorithm::iterativeSearch()
 
 void SearchAlgorithm::printPath(Configuration *configPtr)
 {
-    if (configPtr == NULL)
-	return;
-    else
+    #ifdef DEBUG
+    Configuration *currConfig = configPtr;
+    while (currConfig != NULL)
     {
-	printPath(configPtr->getParent());
-	cout << configPtr->getState().getMove() << " ";
+        getchar();
+        cout << currConfig->getMove() << endl;
+        cout << currConfig << endl;
+        currConfig = currConfig->getParent();
     }
+    #endif
+    
+    if (configPtr->getParent() != NULL)
+    {
+        printPath(configPtr->getParent());
+        cout << configPtr->getMove();
+    }
+    return;
 }
 
 void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *start, struct timespec *finish)
 {
+    #ifdef DEBUG
+    cout << "Calculating elapsed time..." << endl;
+    #endif
+
     // time calculation
     double elapsed = (finish->tv_sec - start->tv_sec) + ((finish->tv_nsec - start->tv_nsec)/1000000000.0);
-
-    cout << setprecision(2) << "Found solution: ";
+    
+    cout << "Found solution: ";
+    
     printPath(solution);
-    cout << "with depth " << solution->getDepth() << " in " << elapsed << " seconds" << endl;
+    
+    cout << setprecision(2) << " at depth " << solution->getDepth() << " in " << elapsed << " seconds" << endl;
 }

@@ -10,6 +10,7 @@ using namespace std;
 
 
 // allowed movements for the blank board piece
+//                            D  U   L  R
 const int Board::MOVES_X[] = {1, 0, -1, 0};
 const int Board::MOVES_Y[] = {0, 1, 0, -1};
 
@@ -74,8 +75,7 @@ int** Board::getArr() const
     return arr;
 }
 
-// move getter
-int getMove() const
+int Board::getMove() const
 {
     return move;
 }

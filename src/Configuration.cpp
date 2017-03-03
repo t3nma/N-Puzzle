@@ -62,15 +62,16 @@ int Configuration::getDepth() const
     return depth;
 }
 
-Configuration *getParent() const
+Configuration *Configuration::getParent() const
 {
     return parent;
 }
 
-Board *getState() const
+int Configuration::getMove() const
 {
-    return state;
+    return state.getMove();
 }
+
 ostream& operator<<(ostream& os, const Configuration& c)
 {
     os << "------- Configuration -------\n\n";

@@ -26,7 +26,7 @@ public:
 
     /* getters */
     int getDepth() const;
-    Board getState() const;
+    int getMove() const;
     Configuration *getParent() const;
     
     /* operator overloading */
