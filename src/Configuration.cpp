@@ -62,11 +62,6 @@ int Configuration::getDepth() const
     return depth;
 }
 
-Configuration *Configuration::getParent() const
-{
-    return parent;
-}
-
 int Configuration::getMove() const
 {
     return state.getMove();

@@ -1,0 +1,557 @@
+src/SearchAlgorithm.cpp: In member function ‘void SearchAlgorithm::enqueue(Configuration*)’:
+src/SearchAlgorithm.cpp:38:58: error: conversion from ‘std::vector<std::pair<int, Configuration*> >::iterator {aka __gnu_cxx::__normal_iterator<std::pair<int, Configuration*>*, std::vector<std::pair<int, Configuration*> > >}’ to non-scalar type ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ requested
+     vector<Configuration*>::iterator it = closedSet.begin();
+                                                          ^
+src/SearchAlgorithm.cpp:39:12: error: no match for ‘operator!=’ (operand types are ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ and ‘std::vector<std::pair<int, Configuration*> >::iterator {aka __gnu_cxx::__normal_iterator<std::pair<int, Configuration*>*, std::vector<std::pair<int, Configuration*> > >}’)
+     for(;it!=closedSet.end(); ++it)
+            ^
+In file included from /usr/include/c++/5/iosfwd:40:0,
+                 from /usr/include/c++/5/ios:38,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/postypes.h:221:5: note: candidate: template<class _StateT> bool std::operator!=(const std::fpos<_StateT>&, const std::fpos<_StateT>&)
+     operator!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+     ^
+/usr/include/c++/5/bits/postypes.h:221:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::fpos<_StateT>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_pair.h:227:5: note: candidate: template<class _T1, class _T2> bool std::operator!=(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)
+     operator!=(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+     ^
+/usr/include/c++/5/bits/stl_pair.h:227:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::pair<_T1, _T2>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:304:5: note: candidate: template<class _Iterator> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator!=(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:304:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:354:5: note: candidate: template<class _IteratorL, class _IteratorR> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator!=(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:354:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/string:41:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/allocator.h:140:5: note: candidate: template<class _T1, class _T2> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_T2>&)
+     operator!=(const allocator<_T1>&, const allocator<_T2>&)
+     ^
+/usr/include/c++/5/bits/allocator.h:140:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::allocator<_CharT>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/string:41:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/allocator.h:146:5: note: candidate: template<class _Tp> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_CharT>&)
+     operator!=(const allocator<_Tp>&, const allocator<_Tp>&)
+     ^
+/usr/include/c++/5/bits/allocator.h:146:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::allocator<_CharT>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/string:52:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/basic_string.h:4950:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/5/bits/basic_string.h:4950:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/string:52:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/basic_string.h:4962:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const _CharT*, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const _CharT* __lhs,
+     ^
+/usr/include/c++/5/bits/basic_string.h:4962:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   mismatched types ‘const _CharT*’ and ‘__gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/string:52:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/basic_string.h:4974:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/5/bits/basic_string.h:4974:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/bits/locale_facets.h:48:0,
+                 from /usr/include/c++/5/bits/basic_ios.h:37,
+                 from /usr/include/c++/5/ios:44,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/streambuf_iterator.h:210:5: note: candidate: template<class _CharT, class _Traits> bool std::operator!=(const std::istreambuf_iterator<_CharT, _Traits>&, const std::istreambuf_iterator<_CharT, _Traits>&)
+     operator!=(const istreambuf_iterator<_CharT, _Traits>& __a,
+     ^
+/usr/include/c++/5/bits/streambuf_iterator.h:210:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::istreambuf_iterator<_CharT, _Traits>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/vector:64:0,
+                 from src/headers/Board.h:14,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_vector.h:1535:5: note: candidate: template<class _Tp, class _Alloc> bool std::operator!=(const std::vector<_Tp, _Alloc>&, const std::vector<_Tp, _Alloc>&)
+     operator!=(const vector<_Tp, _Alloc>& __x, const vector<_Tp, _Alloc>& __y)
+     ^
+/usr/include/c++/5/bits/stl_vector.h:1535:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::vector<_Tp, _Alloc>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/deque:64:0,
+                 from /usr/include/c++/5/queue:60,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_deque.h:278:5: note: candidate: template<class _Tp, class _Ref, class _Ptr> bool std::operator!=(const std::_Deque_iterator<_Tp, _Ref, _Ptr>&, const std::_Deque_iterator<_Tp, _Ref, _Ptr>&)
+     operator!=(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+     ^
+/usr/include/c++/5/bits/stl_deque.h:278:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::_Deque_iterator<_Tp, _Ref, _Ptr>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/deque:64:0,
+                 from /usr/include/c++/5/queue:60,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_deque.h:285:5: note: candidate: template<class _Tp, class _RefL, class _PtrL, class _RefR, class _PtrR> bool std::operator!=(const std::_Deque_iterator<_Tp, _Ref, _Ptr>&, const std::_Deque_iterator<_Tp, _RefR, _PtrR>&)
+     operator!=(const _Deque_iterator<_Tp, _RefL, _PtrL>& __x,
+     ^
+/usr/include/c++/5/bits/stl_deque.h:285:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::_Deque_iterator<_Tp, _Ref, _Ptr>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/deque:64:0,
+                 from /usr/include/c++/5/queue:60,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_deque.h:2246:5: note: candidate: template<class _Tp, class _Alloc> bool std::operator!=(const std::deque<_Tp, _Alloc>&, const std::deque<_Tp, _Alloc>&)
+     operator!=(const deque<_Tp, _Alloc>& __x,
+     ^
+/usr/include/c++/5/bits/stl_deque.h:2246:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::deque<_Tp, _Alloc>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/queue:64:0,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_queue.h:295:5: note: candidate: template<class _Tp, class _Seq> bool std::operator!=(const std::queue<_Tp, _Seq>&, const std::queue<_Tp, _Seq>&)
+     operator!=(const queue<_Tp, _Seq>& __x, const queue<_Tp, _Seq>& __y)
+     ^
+/usr/include/c++/5/bits/stl_queue.h:295:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::queue<_Tp, _Seq>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/c++allocator.h:33:0,
+                 from /usr/include/c++/5/bits/allocator.h:46,
+                 from /usr/include/c++/5/string:41,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/ext/new_allocator.h:144:5: note: candidate: template<class _Tp> bool __gnu_cxx::operator!=(const __gnu_cxx::new_allocator<_Tp>&, const __gnu_cxx::new_allocator<_Tp>&)
+     operator!=(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+     ^
+/usr/include/c++/5/ext/new_allocator.h:144:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const __gnu_cxx::new_allocator<_Tp>’
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:841:5: note: candidate: template<class _Iterator, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:841:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   deduced conflicting types for parameter ‘_Iterator’ (‘Configuration**’ and ‘std::pair<int, Configuration*>*’)
+     for(;it!=closedSet.end(); ++it)
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:834:5: note: candidate: template<class _IteratorL, class _IteratorR, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator!=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:834:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:39:28: note:   deduced conflicting types for parameter ‘_Container’ (‘std::vector<Configuration*>’ and ‘std::vector<std::pair<int, Configuration*> >’)
+     for(;it!=closedSet.end(); ++it)
+                            ^
+src/SearchAlgorithm.cpp:40:12: error: ‘std::vector<Configuration*>::iterator {aka class __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ has no member named ‘second’
+  if( *(*it.second) == *c )
+            ^
+src/SearchAlgorithm.cpp:43:11: error: no match for ‘operator!=’ (operand types are ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ and ‘std::vector<std::pair<int, Configuration*> >::iterator {aka __gnu_cxx::__normal_iterator<std::pair<int, Configuration*>*, std::vector<std::pair<int, Configuration*> > >}’)
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+           ^
+In file included from /usr/include/c++/5/iosfwd:40:0,
+                 from /usr/include/c++/5/ios:38,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/postypes.h:221:5: note: candidate: template<class _StateT> bool std::operator!=(const std::fpos<_StateT>&, const std::fpos<_StateT>&)
+     operator!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+     ^
+/usr/include/c++/5/bits/postypes.h:221:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::fpos<_StateT>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:64:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_pair.h:227:5: note: candidate: template<class _T1, class _T2> bool std::operator!=(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)
+     operator!=(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+     ^
+/usr/include/c++/5/bits/stl_pair.h:227:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::pair<_T1, _T2>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:304:5: note: candidate: template<class _Iterator> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator!=(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:304:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:354:5: note: candidate: template<class _IteratorL, class _IteratorR> bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator!=(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:354:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/string:41:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/allocator.h:140:5: note: candidate: template<class _T1, class _T2> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_T2>&)
+     operator!=(const allocator<_T1>&, const allocator<_T2>&)
+     ^
+/usr/include/c++/5/bits/allocator.h:140:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::allocator<_CharT>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/string:41:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/allocator.h:146:5: note: candidate: template<class _Tp> bool std::operator!=(const std::allocator<_CharT>&, const std::allocator<_CharT>&)
+     operator!=(const allocator<_Tp>&, const allocator<_Tp>&)
+     ^
+/usr/include/c++/5/bits/allocator.h:146:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::allocator<_CharT>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/string:52:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/basic_string.h:4950:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/5/bits/basic_string.h:4950:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/string:52:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/basic_string.h:4962:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const _CharT*, const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&)
+     operator!=(const _CharT* __lhs,
+     ^
+/usr/include/c++/5/bits/basic_string.h:4962:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   mismatched types ‘const _CharT*’ and ‘__gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/string:52:0,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/basic_string.h:4974:5: note: candidate: template<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*)
+     operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/5/bits/basic_string.h:4974:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::__cxx11::basic_string<_CharT, _Traits, _Alloc>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/bits/locale_facets.h:48:0,
+                 from /usr/include/c++/5/bits/basic_ios.h:37,
+                 from /usr/include/c++/5/ios:44,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/streambuf_iterator.h:210:5: note: candidate: template<class _CharT, class _Traits> bool std::operator!=(const std::istreambuf_iterator<_CharT, _Traits>&, const std::istreambuf_iterator<_CharT, _Traits>&)
+     operator!=(const istreambuf_iterator<_CharT, _Traits>& __a,
+     ^
+/usr/include/c++/5/bits/streambuf_iterator.h:210:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::istreambuf_iterator<_CharT, _Traits>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/vector:64:0,
+                 from src/headers/Board.h:14,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_vector.h:1535:5: note: candidate: template<class _Tp, class _Alloc> bool std::operator!=(const std::vector<_Tp, _Alloc>&, const std::vector<_Tp, _Alloc>&)
+     operator!=(const vector<_Tp, _Alloc>& __x, const vector<_Tp, _Alloc>& __y)
+     ^
+/usr/include/c++/5/bits/stl_vector.h:1535:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::vector<_Tp, _Alloc>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/deque:64:0,
+                 from /usr/include/c++/5/queue:60,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_deque.h:278:5: note: candidate: template<class _Tp, class _Ref, class _Ptr> bool std::operator!=(const std::_Deque_iterator<_Tp, _Ref, _Ptr>&, const std::_Deque_iterator<_Tp, _Ref, _Ptr>&)
+     operator!=(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+     ^
+/usr/include/c++/5/bits/stl_deque.h:278:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::_Deque_iterator<_Tp, _Ref, _Ptr>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/deque:64:0,
+                 from /usr/include/c++/5/queue:60,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_deque.h:285:5: note: candidate: template<class _Tp, class _RefL, class _PtrL, class _RefR, class _PtrR> bool std::operator!=(const std::_Deque_iterator<_Tp, _Ref, _Ptr>&, const std::_Deque_iterator<_Tp, _RefR, _PtrR>&)
+     operator!=(const _Deque_iterator<_Tp, _RefL, _PtrL>& __x,
+     ^
+/usr/include/c++/5/bits/stl_deque.h:285:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::_Deque_iterator<_Tp, _Ref, _Ptr>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/deque:64:0,
+                 from /usr/include/c++/5/queue:60,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_deque.h:2246:5: note: candidate: template<class _Tp, class _Alloc> bool std::operator!=(const std::deque<_Tp, _Alloc>&, const std::deque<_Tp, _Alloc>&)
+     operator!=(const deque<_Tp, _Alloc>& __x,
+     ^
+/usr/include/c++/5/bits/stl_deque.h:2246:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::deque<_Tp, _Alloc>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/queue:64:0,
+                 from src/headers/SearchAlgorithm.h:13,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_queue.h:295:5: note: candidate: template<class _Tp, class _Seq> bool std::operator!=(const std::queue<_Tp, _Seq>&, const std::queue<_Tp, _Seq>&)
+     operator!=(const queue<_Tp, _Seq>& __x, const queue<_Tp, _Seq>& __y)
+     ^
+/usr/include/c++/5/bits/stl_queue.h:295:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const std::queue<_Tp, _Seq>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/x86_64-linux-gnu/c++/5/bits/c++allocator.h:33:0,
+                 from /usr/include/c++/5/bits/allocator.h:46,
+                 from /usr/include/c++/5/string:41,
+                 from /usr/include/c++/5/bits/locale_classes.h:40,
+                 from /usr/include/c++/5/bits/ios_base.h:41,
+                 from /usr/include/c++/5/ios:42,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/ext/new_allocator.h:144:5: note: candidate: template<class _Tp> bool __gnu_cxx::operator!=(const __gnu_cxx::new_allocator<_Tp>&, const __gnu_cxx::new_allocator<_Tp>&)
+     operator!=(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+     ^
+/usr/include/c++/5/ext/new_allocator.h:144:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   ‘std::vector<Configuration*>::iterator {aka __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ is not derived from ‘const __gnu_cxx::new_allocator<_Tp>’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:841:5: note: candidate: template<class _Iterator, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:841:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   deduced conflicting types for parameter ‘_Iterator’ (‘Configuration**’ and ‘std::pair<int, Configuration*>*’)
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+In file included from /usr/include/c++/5/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/5/bits/char_traits.h:39,
+                 from /usr/include/c++/5/ios:40,
+                 from /usr/include/c++/5/ostream:38,
+                 from /usr/include/c++/5/iostream:39,
+                 from src/headers/Board.h:13,
+                 from src/headers/Configuration.h:11,
+                 from src/headers/SearchAlgorithm.h:10,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/stl_iterator.h:834:5: note: candidate: template<class _IteratorL, class _IteratorR, class _Container> bool __gnu_cxx::operator!=(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator!=(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/5/bits/stl_iterator.h:834:5: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:43:28: note:   deduced conflicting types for parameter ‘_Container’ (‘std::vector<Configuration*>’ and ‘std::vector<std::pair<int, Configuration*> >’)
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                            ^
+src/SearchAlgorithm.cpp:43:37: error: ‘std::vector<Configuration*>::iterator {aka class __gnu_cxx::__normal_iterator<Configuration**, std::vector<Configuration*> >}’ has no member named ‘first’
+     if(it != closedSet.end() && *it.first <= c->getDepth())
+                                     ^
+make: *** [obj/SearchAlgorithm.o] Error 1

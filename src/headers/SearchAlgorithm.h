@@ -9,6 +9,7 @@
 
 #include "Configuration.h"
 #include "HeapComparator.h"
+#include <vector>
 #include <queue>
 #include <ctime>
 
@@ -38,7 +39,9 @@ public:
     void iterativeSearch();
     
 private:
-    priority_queue<NODE, vector<NODE>, HeapComparator> q;
+
+    priority_queue<NODE, vector<NODE>, HeapComparator> q; // our openSet representation
+    vector<NODE> closedSet;
     Configuration *startConfig;
     Configuration *goalConfig;
     int searchType;
