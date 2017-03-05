@@ -30,10 +30,11 @@ public:
     };
     
     SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType);
+    ~SearchAlgorithm();
     
     /* queuing functions */
-    void enqueue(Configuration *c);
-    void enqueueAll(const vector<Configuration*>& cList);
+    bool enqueue(Configuration *c);
+    void enqueueAll(vector<Configuration*> cList);
 
     // general search algorithm
     bool search();

@@ -3,6 +3,11 @@
 #include <sstream>
 #include <vector>
 
+inline void printMenu()
+{
+    cout << endl << "0-Exit | 1-Astar | 2-Greedy | 3-DFS | 4-BFS | 5-IDFS" << endl;
+}
+
 int main(int argc, char *argv[])
 {
     int N=4;
@@ -19,13 +24,41 @@ int main(int argc, char *argv[])
 	    return 1;
 	}
     }
-    
+
     NPuzzle p(N);
+    string inputStr;
+    int inputInt;
     
-    if(p.isSolvable())
-	p.searchAstar();
-    else
-	cout << "This instance of the problem is not solvable." << endl;
+    do
+    {
+	printMenu();
+	cin >> inputStr;
+
+	istringstream ss(inputStr);
+	if( !(ss >> inputInt) || inputInt < 0 || inputInt > 5 )
+	{
+	    cout << "Invalid option! Type again" << endl;
+	    continue;
+	}
+
+	if(inputInt != 0)
+	{
+	    if(!p.isSolvable())
+		cout << "This instance of the problem is not solvable!" << endl;
+	    else
+		switch(inputInt)
+		{
+		    case 1: p.searchAstar(); break;
+		    case 2: p.searchGreedy(); break;
+		    case 3: p.searchDFS(); break;
+		    case 4: p.searchBFS(); break;
+		    case 5: p.searchIDFS(); break;
+		}
+	}
+	
+    } while(inputInt != 0);
+
+    cout << "Goodbye :)" << endl;
     
     return 0;
 }

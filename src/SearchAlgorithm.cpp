@@ -7,6 +7,7 @@
 #include <utility>
 #include <cstdio>
 
+
 // constructor
 SearchAlgorithm::SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType)
     : startConfig( new Configuration(startConfig) ),
@@ -14,7 +15,14 @@ SearchAlgorithm::SearchAlgorithm(const Configuration& startConfig, const Configu
       searchType(searchType)
 { }
 
-void SearchAlgorithm::enqueue(Configuration *c)
+// destructor
+SearchAlgorithm::~SearchAlgorithm()
+{
+    delete startConfig;
+    delete goalConfig;
+}
+
+bool SearchAlgorithm::enqueue(Configuration *c)
 {   
     int cost = 0;
     
@@ -31,24 +39,29 @@ void SearchAlgorithm::enqueue(Configuration *c)
 	    break;
         case IDFS:
 	    if(c->getDepth() > depthLimit)
-		return;
+		return false; // ignore sucessor, don't enqueue
 	    cost = -1*c->getDepth(); break;
         default:
-	    return;
+	    return false;
     }
 
     unordered_map<string,Configuration*>::const_iterator it = closedSet.find(c->toString());
     
     if(it != closedSet.end() && it->second->getDepth() <= c->getDepth() )
-	return;
+    {
+	closedSet.erase(it);	
+	return false; // ignore sucessor, don't enqueue
+    }
     
     q.push( make_pair(cost,c) );
+    return true; // enqueued
 }
 
-void SearchAlgorithm::enqueueAll(const vector<Configuration*>& cList)
+void SearchAlgorithm::enqueueAll(vector<Configuration*> cList)
 {
     for(size_t i=0; i<cList.size(); i++)
-	enqueue(cList[i]);
+	if(!enqueue(cList[i]))
+	    delete cList[i];
 }
 
 bool SearchAlgorithm::search()
@@ -66,6 +79,7 @@ bool SearchAlgorithm::search()
 	{
 	    clock_gettime(CLOCK_MONOTONIC, &finish);
             printSolution(node.second, &start, &finish);
+	    
 	    return true;
 	}
 	
@@ -83,7 +97,7 @@ void SearchAlgorithm::iterativeSearch()
     while(!search())
     {
 	depthLimit++;
-	// closedSet.clear();
+	closedSet.clear();
 	cout << "searching with limit: " << depthLimit << endl;
     }
 }
