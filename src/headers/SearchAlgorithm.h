@@ -38,7 +38,7 @@ public:
 
     // general search algorithm
     bool search();
-    void iterativeSearch();
+    bool iterativeSearch();
     
 private:
 
@@ -49,7 +49,8 @@ private:
     Configuration *goalConfig;
     int searchType;
     int depthLimit;
-
+    int nodeCount;
+    
     void printPath(Configuration *configPtr);
     void printSolution(Configuration *solution, struct timespec *start, struct timespec *finish);
 };

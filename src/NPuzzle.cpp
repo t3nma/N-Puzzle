@@ -26,32 +26,37 @@ NPuzzle::~NPuzzle()
 void NPuzzle::searchAstar() const
 {
     SearchAlgorithm astar(*startConfig, *goalConfig, SearchAlgorithm::ASTAR);
-    astar.search();
+    if(!astar.search())
+	cout << "Solution not found!" << endl;
 }
 
 // Greedy search implementation
 void NPuzzle::searchGreedy() const
 {
     SearchAlgorithm greedy(*startConfig, *goalConfig, SearchAlgorithm::GREEDY);
-    greedy.search();
+    if(!greedy.search())
+	cout << "Solution not found!" << endl;
 }
 
 void NPuzzle::searchDFS() const
 {
     SearchAlgorithm dfs(*startConfig, *goalConfig, SearchAlgorithm::DFS);
-    dfs.search();
+    if(!dfs.search())
+	cout << "Solution not found!" << endl;
 }
 
 void NPuzzle::searchBFS() const
 {
     SearchAlgorithm bfs(*startConfig, *goalConfig, SearchAlgorithm::BFS);
-    bfs.search();
+    if(!bfs.search())
+	cout << "Solution not found!" << endl;
 }
 
 void NPuzzle::searchIDFS() const
 {
     SearchAlgorithm idfs(*startConfig, *goalConfig, SearchAlgorithm::IDFS);
-    idfs.iterativeSearch();
+    if(!idfs.iterativeSearch())
+	cout << "Solution not found!" << endl;
 }
 
 // check if its possible to solve the puzzle

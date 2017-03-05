@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	    return 1;
 	}
     }
-    
+	
     NPuzzle *p = new NPuzzle(N);
     while(!p->isSolvable())
     {

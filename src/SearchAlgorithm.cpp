@@ -57,8 +57,12 @@ bool SearchAlgorithm::enqueue(Configuration *c)
 	else
 	    return false; // ignore sucessor, don't enqueue
     }
+    else
+	closedSet.insert( make_pair(c->toString(),c) );
     
     q.push( make_pair(cost,c) );
+    nodeCount++;
+    
     return true; // enqueued
 }
 
@@ -71,12 +75,16 @@ void SearchAlgorithm::enqueueAll(vector<Configuration*> cList)
 
 bool SearchAlgorithm::search()
 {
+    // init time counter
     struct timespec start, finish;
     clock_gettime(CLOCK_MONOTONIC, &start);
 
+    // enqueue first node and init node counter
     enqueue(startConfig);
     closedSet.insert( make_pair(startConfig->toString(), startConfig) );
-    
+    nodeCount = 1;
+
+    // do search step while there are nodes to visit
     while(!q.empty())
     {
 	NODE node = q.top(); q.pop();
@@ -92,19 +100,19 @@ bool SearchAlgorithm::search()
 	enqueueAll(node.second->makeDescendants());
     }
 
-    cout << "Solution not found!" << endl;
-    return false;
+    return false; // solution not found
 }
 
-void SearchAlgorithm::iterativeSearch()
+bool SearchAlgorithm::iterativeSearch()
 {   
     depthLimit=0;
-    while(!search())
+    while(!search() && depthLimit <= 150) // TODO handle hard coded limit 
     {
 	depthLimit++;
 	closedSet.clear();
-	cout << "searching with limit: " << depthLimit << endl;
     }
+
+    return (depthLimit <= 150);
 }
 
 void SearchAlgorithm::printPath(Configuration *configPtr)
@@ -136,5 +144,8 @@ void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *st
     
     cout << "Found solution:" << endl;
     //printPath(solution);
-    cout << setprecision(2) << endl << "Depth: " << solution->getDepth() << endl << "Time: " << elapsed << " seconds" << endl;
+    cout << "Depth: " << solution->getDepth() << endl;
+    cout << "Nodes: " << nodeCount << endl;
+    cout << "Space: " << nodeCount * ((double)sizeof(Configuration) / (1024*1024)) << "mb" << endl;
+    cout << setprecision(2) << "Time: " << elapsed << " seconds" << endl;
 }
