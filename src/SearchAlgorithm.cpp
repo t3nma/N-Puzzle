@@ -146,6 +146,6 @@ void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *st
     //printPath(solution);
     cout << "Depth: " << solution->getDepth() << endl;
     cout << "Nodes: " << nodeCount << endl;
-    cout << "Space: " << nodeCount * ((double)sizeof(Configuration) / (1024*1024)) << "mb" << endl;
-    cout << setprecision(2) << "Time: " << elapsed << " seconds" << endl;
+    cout << "Space: " << nodeCount * ((double)sizeof(Configuration) / (1024*1024)) << "Mb" << endl;
+    cout << setprecision(2) << "Time: " << elapsed << "s" << endl;
 }
