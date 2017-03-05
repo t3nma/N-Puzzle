@@ -10,7 +10,10 @@
 
 #include "Board.h"
 #include <vector>
+#include <string>
+
 using namespace std;
+
 
 class Configuration
 {
@@ -26,7 +29,8 @@ public:
     vector<Configuration*> makeDescendants();
     bool isSolvable(const Configuration* goal) const;
     int cost(bool greedy, const Configuration* goal) const;
-
+    string toString() const;
+    
     /* getters */
     int getDepth() const;
     int getMove() const;

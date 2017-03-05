@@ -9,10 +9,12 @@
 #define BOARD_H
 #define IS_EVEN(N) (N%2 == 0)
 
-
 #include <iostream>
 #include <vector>
+#include <string>
+
 using namespace std;
+
 
 class Board
 {
@@ -39,7 +41,8 @@ public:
     vector<Board> makeDescendants();
     int manhattanDist(const Board& goal) const;
     bool isSolvable(const Board& goal) const;
-
+    string toString() const;
+    
     /* operator overloading */
     friend istream& operator>>(istream& is, Board& b);
     friend ostream& operator<<(ostream& os, const Board& b);

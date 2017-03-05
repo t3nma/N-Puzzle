@@ -5,6 +5,7 @@
 #include "headers/Board.h"
 #include <cstdlib>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -89,7 +90,7 @@ void Board::setBlankX(int blankX)
 // move setter
 void Board::setMove(int move)
 {
-  this->move = move;
+    this->move = move;
 }
 
 // blankY setter
@@ -175,6 +176,15 @@ bool Board::isSolvable(const Board& goal) const
     bool rhs = (!IS_EVEN(size) && IS_EVEN(invG)) || ( IS_EVEN(size) && ( !IS_EVEN((size-goal.blankX)) == IS_EVEN(invG) ) );
     
     return lhs == rhs;
+}
+
+string Board::toString() const
+{
+    string out = "";
+    for(int i=0; i<size*size; ++i)
+	out += static_cast< ostringstream& >( ostringstream() << dec << arr[i/size][i%size]).str();
+
+    return out;
 }
 
 // >> operator support

@@ -16,7 +16,8 @@ SearchAlgorithm::SearchAlgorithm(const Configuration& startConfig, const Configu
 
 void SearchAlgorithm::enqueue(Configuration *c)
 {   
-    int cost = 0;    
+    int cost = 0;
+    
     switch(searchType)
     {
         case ASTAR:
@@ -26,7 +27,8 @@ void SearchAlgorithm::enqueue(Configuration *c)
         case DFS:
 	    cost = -1*c->getDepth(); break;
         case BFS:
-	    cost = c->getDepth(); break;
+	    cost = c->getDepth();
+	    break;
         case IDFS:
 	    if(c->getDepth() > depthLimit)
 		return;
@@ -35,12 +37,9 @@ void SearchAlgorithm::enqueue(Configuration *c)
 	    return;
     }
 
-    vector<NODE>::iterator it = closedSet.begin();
-    for(;it!=closedSet.end(); ++it)
-	if( *(it->second) == *c )
-	    break;
-
-    if(it != closedSet.end() && it->first <= c->getDepth())
+    unordered_map<string,Configuration*>::const_iterator it = closedSet.find(c->toString());
+    
+    if(it != closedSet.end() && it->second->getDepth() <= c->getDepth() )
 	return;
     
     q.push( make_pair(cost,c) );
@@ -62,16 +61,16 @@ bool SearchAlgorithm::search()
     while(!q.empty())
     {
 	NODE node = q.top(); q.pop();
-	 
+
 	if(*node.second == *goalConfig)
 	{
 	    clock_gettime(CLOCK_MONOTONIC, &finish);
             printSolution(node.second, &start, &finish);
 	    return true;
 	}
-
+	
 	enqueueAll(node.second->makeDescendants());
-	closedSet.push_back( make_pair(node.second->getDepth(), node.second) );
+	closedSet.insert( make_pair(node.second->toString(), node.second) );
     }
 
     cout << "Solution not found!" << endl;
@@ -84,6 +83,7 @@ void SearchAlgorithm::iterativeSearch()
     while(!search())
     {
 	depthLimit++;
+	// closedSet.clear();
 	cout << "searching with limit: " << depthLimit << endl;
     }
 }

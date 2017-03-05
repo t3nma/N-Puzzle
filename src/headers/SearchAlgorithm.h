@@ -9,9 +9,10 @@
 
 #include "Configuration.h"
 #include "HeapComparator.h"
-#include <vector>
+#include <unordered_map>
 #include <queue>
 #include <ctime>
+
 
 using namespace std;
 
@@ -41,7 +42,8 @@ public:
 private:
 
     priority_queue<NODE, vector<NODE>, HeapComparator> q; // our openSet representation
-    vector<NODE> closedSet;
+    unordered_map<string,Configuration*> closedSet;
+    
     Configuration *startConfig;
     Configuration *goalConfig;
     int searchType;

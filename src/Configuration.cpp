@@ -5,6 +5,7 @@
 #include "headers/Configuration.h"
 using namespace std;
 
+
 // all-member constructor
 Configuration::Configuration(const Board& state, int depth, Configuration *parent)
     : state(state),
@@ -55,6 +56,11 @@ int Configuration::cost(bool greedy, const Configuration *goal) const
 {
     int dx = state.manhattanDist(goal->state);
     return greedy ? dx : depth + dx;
+}
+
+string Configuration::toString() const
+{
+    return state.toString();
 }
 
 int Configuration::getDepth() const
