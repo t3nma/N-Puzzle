@@ -47,10 +47,15 @@ bool SearchAlgorithm::enqueue(Configuration *c)
 
     unordered_map<string,Configuration*>::const_iterator it = closedSet.find(c->toString());
     
-    if(it != closedSet.end() && it->second->getDepth() <= c->getDepth() )
+    if(it != closedSet.end())
     {
-	closedSet.erase(it);	
-	return false; // ignore sucessor, don't enqueue
+	if( it->second->getDepth() > c->getDepth() )
+        {
+	    delete it->second;
+	    closedSet[it->first] = c;
+	}
+	else
+	    return false; // ignore sucessor, don't enqueue
     }
     
     q.push( make_pair(cost,c) );
@@ -68,8 +73,9 @@ bool SearchAlgorithm::search()
 {
     struct timespec start, finish;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    
+
     enqueue(startConfig);
+    closedSet.insert( make_pair(startConfig->toString(), startConfig) );
     
     while(!q.empty())
     {
@@ -84,7 +90,6 @@ bool SearchAlgorithm::search()
 	}
 	
 	enqueueAll(node.second->makeDescendants());
-	closedSet.insert( make_pair(node.second->toString(), node.second) );
     }
 
     cout << "Solution not found!" << endl;

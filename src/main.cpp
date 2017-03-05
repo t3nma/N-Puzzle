@@ -24,8 +24,15 @@ int main(int argc, char *argv[])
 	    return 1;
 	}
     }
-
-    NPuzzle p(N);
+    
+    NPuzzle *p = new NPuzzle(N);
+    while(!p->isSolvable())
+    {
+	cout << "This instance of the problem is not solvable!" << endl;
+	delete p;
+	p = new NPuzzle(N);
+    }
+    
     string inputStr;
     int inputInt;
     
@@ -41,19 +48,13 @@ int main(int argc, char *argv[])
 	    continue;
 	}
 
-	if(inputInt != 0)
+	switch(inputInt)
 	{
-	    if(!p.isSolvable())
-		cout << "This instance of the problem is not solvable!" << endl;
-	    else
-		switch(inputInt)
-		{
-		    case 1: p.searchAstar(); break;
-		    case 2: p.searchGreedy(); break;
-		    case 3: p.searchDFS(); break;
-		    case 4: p.searchBFS(); break;
-		    case 5: p.searchIDFS(); break;
-		}
+	    case 1: p->searchAstar(); break;
+	    case 2: p->searchGreedy(); break;
+	    case 3: p->searchDFS(); break;
+	    case 4: p->searchBFS(); break;
+	    case 5: p->searchIDFS(); break;
 	}
 	
     } while(inputInt != 0);
