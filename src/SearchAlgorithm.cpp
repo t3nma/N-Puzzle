@@ -117,21 +117,10 @@ bool SearchAlgorithm::iterativeSearch()
 
 void SearchAlgorithm::printPath(Configuration *configPtr)
 {
-    #ifdef DEBUG
-    Configuration *currConfig = configPtr;
-    while (currConfig != NULL)
-    {
-        getchar();
-        cout << currConfig->getMove() << endl;
-        cout << currConfig << endl;
-        currConfig = currConfig->getParent();
-    }
-    #endif
-    
     if (configPtr->parent != NULL)
     {
         printPath(configPtr->parent);
-        cout << configPtr->getMove() << " ";
+        cout << (char) configPtr->getMove();
     }
     
     return;
@@ -143,7 +132,7 @@ void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *st
     double elapsed = (finish->tv_sec - start->tv_sec) + ((finish->tv_nsec - start->tv_nsec)/1000000000.0);
     
     cout << "Found solution:" << endl;
-    //printPath(solution);
+    printPath(solution);
     cout << "Depth: " << solution->getDepth() << endl;
     cout << "Nodes: " << nodeCount << endl;
     cout << "Space: " << nodeCount * ((double)sizeof(Configuration) / (1024*1024)) << "Mb" << endl;

@@ -23,19 +23,19 @@ public:
     static const int MOVES_X[];
     static const int MOVES_Y[];
 
-    Board(int size, int move=-1);
+    Board(int size, char move=-1);
     Board(const Board& b);
     Board& operator=(const Board& b);
     ~Board();
 
     /* getters */
     int **getArr() const;
-    int getMove() const;
+    char getMove() const;
     
     /* setters */
     void setBlankX(int blankX);
     void setBlankY(int blankY);
-    void setMove(int move);
+    void setMove(char move);
     
     /* util */
     vector<Board> makeDescendants();
@@ -52,7 +52,7 @@ private:
     int size;
     int blankX;
     int blankY;
-    int move;
+    char move;
     
     bool isIn(int x, int y) const;
 };

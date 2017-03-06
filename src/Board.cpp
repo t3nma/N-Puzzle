@@ -11,12 +11,12 @@ using namespace std;
 
 
 // allowed movements for the blank board piece
-//                            D  U   L  R
+//                            D  R   U  L
 const int Board::MOVES_X[] = {1, 0, -1, 0};
 const int Board::MOVES_Y[] = {0, 1, 0, -1};
 
 // 1-param constructor
-Board::Board(int size, int move)
+Board::Board(int size, char move)
     : arr(new int*[size]), size(size), blankX(-1), blankY(-1), move(move)
 {
     for(int i=0; i<size; ++i)
@@ -76,7 +76,7 @@ int** Board::getArr() const
     return arr;
 }
 
-int Board::getMove() const
+char Board::getMove() const
 {
     return move;
 }
@@ -88,7 +88,7 @@ void Board::setBlankX(int blankX)
 }
 
 // move setter
-void Board::setMove(int move)
+void Board::setMove(char move)
 {
     this->move = move;
 }
@@ -103,15 +103,16 @@ void Board::setBlankY(int blankY)
 // consequence of the blank piece allowed movements
 vector<Board> Board::makeDescendants()
 {
+    char moveToChar[] = {'D','R','U','L'};
     vector<Board> descendants;
 
     int ignore = -1;
     switch(move)
     {
-        case 0: ignore = 2; break;
-        case 1: ignore = 3; break;
-        case 2: ignore = 0; break;
-        case 3: ignore = 1; break;
+        case 'D': ignore = 2; break;
+        case 'R': ignore = 3; break;
+        case 'U': ignore = 0; break;
+        case 'L': ignore = 1; break;
     }
     
     for(int m=0; m<4; m++)
@@ -130,7 +131,11 @@ vector<Board> Board::makeDescendants()
 		
 		newBoard.setBlankX(newBlankX);
 		newBoard.setBlankY(newBlankY);
-                newBoard.setMove(m);
+                newBoard.setMove(moveToChar[m]);
+
+		cout << "Descendant:" << endl;
+		cout << newBoard << endl;
+		cout << "Move: " << newBoard.getMove() << endl;
 		
 		descendants.push_back(newBoard);
 	    }
