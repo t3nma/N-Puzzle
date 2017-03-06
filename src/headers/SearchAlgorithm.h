@@ -37,7 +37,7 @@ public:
     bool enqueue(Configuration *c);
     void enqueueAll(vector<Configuration*> cList);
 
-    // general search algorithm
+    /* search functions */
     bool search();
     bool iterativeSearch();
     

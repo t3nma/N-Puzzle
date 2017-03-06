@@ -9,7 +9,9 @@
 #define NPUZZLE_H
 
 #include "Configuration.h"
+
 using namespace std;
+
 
 class NPuzzle
 {

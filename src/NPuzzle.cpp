@@ -5,8 +5,6 @@
 #include "headers/NPuzzle.h"
 #include "headers/SearchAlgorithm.h"
 
-using namespace std;
-
 
 // constructor
 NPuzzle::NPuzzle(int N)
@@ -22,7 +20,6 @@ NPuzzle::~NPuzzle()
     delete goalConfig;
 }
 
-// A* search implementation
 void NPuzzle::searchAstar() const
 {
     SearchAlgorithm astar(*startConfig, *goalConfig, SearchAlgorithm::ASTAR);
@@ -30,7 +27,6 @@ void NPuzzle::searchAstar() const
 	cout << "Solution not found!" << endl;
 }
 
-// Greedy search implementation
 void NPuzzle::searchGreedy() const
 {
     SearchAlgorithm greedy(*startConfig, *goalConfig, SearchAlgorithm::GREEDY);
@@ -59,8 +55,6 @@ void NPuzzle::searchIDFS() const
 	cout << "Solution not found!" << endl;
 }
 
-// check if its possible to solve the puzzle
-// with its current configurations
 bool NPuzzle::isSolvable() const
 {
     return startConfig->isSolvable(goalConfig);

@@ -23,6 +23,8 @@ SearchAlgorithm::~SearchAlgorithm()
     delete goalConfig;
 }
 
+// enqueue configuration on the priority queue
+// based on the search strategy being applied
 bool SearchAlgorithm::enqueue(Configuration *c)
 {   
     int cost = 0;
@@ -47,8 +49,9 @@ bool SearchAlgorithm::enqueue(Configuration *c)
 	    return false;
     }
 
+    // carefully check for repeated configurations
+    // without losing the optimal solution
     unordered_map<string,int>::const_iterator it = hash.find(c->toString());
-
     if(it != hash.end())
     {	
 	if(it->second > c->getDepth() )
@@ -71,15 +74,17 @@ void SearchAlgorithm::enqueueAll(vector<Configuration*> cList)
 	enqueue(cList[i]);
 }
 
+// our general search function
 bool SearchAlgorithm::search()
 {
     bool searchResult = false;
     
-    // init time counter
+    // init time counter here unless we're
+    // performing IDFS (initialized in iterativeSearch())
     if(searchType != IDFS)
 	clock_gettime(CLOCK_MONOTONIC, &start);
     
-    // enqueue first node and init node counter
+    // enqueue first node
     enqueue(startConfig);
     hash.insert( make_pair(startConfig->toString(),0) );
 
@@ -90,21 +95,26 @@ bool SearchAlgorithm::search()
 	
 	if(*node.second == *goalConfig)
 	{
+	    // get final time
 	    struct timespec finish; 
-	    clock_gettime(CLOCK_MONOTONIC, &finish);	    
+	    clock_gettime(CLOCK_MONOTONIC, &finish);
+	    
             printSolution(node.second, &finish);
+
 	    searchResult = true;
 	    break;
 	}
 	
  	enqueueAll(node.second->makeDescendants());
-	closedSet.push_back(node.second);
+	closedSet.push_back(node.second);	
      }
 
     clean();
     return searchResult; // solution not found
 }
 
+// search function for IDFS, the
+// general search function is still called here
 bool SearchAlgorithm::iterativeSearch()
 {
     // init time counter
@@ -131,7 +141,7 @@ void SearchAlgorithm::printPath(Configuration *configPtr)
 
 void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *finish)
 {
-    // time calculation
+    // search clock time calculation
     double elapsedTime = (finish->tv_sec - start.tv_sec) + ((finish->tv_nsec - start.tv_nsec)/1000000000.0);
     
     cout << "Found solution:" << endl;

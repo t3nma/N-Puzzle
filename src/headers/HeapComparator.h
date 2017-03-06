@@ -1,5 +1,7 @@
 /*
- * PQComparator.h
+ * HeapComparator.h
+ *
+ * Our priority queue comparator that mimics a min-heap
  */
 
 #ifndef HEAPCOMPARATOR_H

@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     NPuzzle *p = new NPuzzle(N);
     while(!p->isSolvable())
     {
-	cout << "This instance of the problem is not solvable!" << endl;
+	cout << endl << "This instance of the problem is not solvable!" << endl << endl;
 	delete p;
 	p = new NPuzzle(N);
     }
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	istringstream ss(inputStr);
 	if( !(ss >> inputInt) || inputInt < 0 || inputInt > 5 )
 	{
-	    cout << "Invalid option! Type again" << endl;
+	    cout << endl << "Invalid option! Type again" << endl << endl;
 	    continue;
 	}
 

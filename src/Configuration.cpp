@@ -3,7 +3,6 @@
  */
 
 #include "headers/Configuration.h"
-using namespace std;
 
 
 // all-member constructor

@@ -7,8 +7,6 @@
 #include <iomanip>
 #include <sstream>
 
-using namespace std;
-
 
 // allowed movements for the blank board piece
 //                            D  R   U  L
