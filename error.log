@@ -1,0 +1,47 @@
+src/SearchAlgorithm.cpp: In member function ‘bool SearchAlgorithm::search()’:
+src/SearchAlgorithm.cpp:86:66: error: no matching function for call to ‘std::unordered_map<std::__cxx11::basic_string<char>, int>::insert(std::pair<std::__cxx11::basic_string<char>, Configuration*>)’
+     hash.insert( make_pair(startConfig->toString(), startConfig) );
+                                                                  ^
+In file included from /usr/include/c++/5/unordered_map:48:0,
+                 from src/headers/SearchAlgorithm.h:12,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/unordered_map.h:432:7: note: candidate: std::pair<typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::iterator, bool> std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(const value_type&) [with _Key = std::__cxx11::basic_string<char>; _Tp = int; _Hash = std::hash<std::__cxx11::basic_string<char> >; _Pred = std::equal_to<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, int> >; typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::iterator = std::__detail::_Node_iterator<std::pair<const std::__cxx11::basic_string<char>, int>, false, true>; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::value_type = std::pair<const std::__cxx11::basic_string<char>, int>]
+       insert(const value_type& __x)
+       ^
+/usr/include/c++/5/bits/unordered_map.h:432:7: note:   no known conversion for argument 1 from ‘std::pair<std::__cxx11::basic_string<char>, Configuration*>’ to ‘const value_type& {aka const std::pair<const std::__cxx11::basic_string<char>, int>&}’
+/usr/include/c++/5/bits/unordered_map.h:439:2: note: candidate: template<class _Pair, class> std::pair<typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::iterator, bool> std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(_Pair&&) [with _Pair = _Pair; <template-parameter-2-2> = <template-parameter-1-2>; _Key = std::__cxx11::basic_string<char>; _Tp = int; _Hash = std::hash<std::__cxx11::basic_string<char> >; _Pred = std::equal_to<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, int> >]
+  insert(_Pair&& __x)
+  ^
+/usr/include/c++/5/bits/unordered_map.h:439:2: note:   template argument deduction/substitution failed:
+/usr/include/c++/5/bits/unordered_map.h:435:32: error: no type named ‘type’ in ‘struct std::enable_if<false, void>’
+       template<typename _Pair, typename = typename
+                                ^
+/usr/include/c++/5/bits/unordered_map.h:466:7: note: candidate: std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::iterator std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::const_iterator, const value_type&) [with _Key = std::__cxx11::basic_string<char>; _Tp = int; _Hash = std::hash<std::__cxx11::basic_string<char> >; _Pred = std::equal_to<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, int> >; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::iterator = std::__detail::_Node_iterator<std::pair<const std::__cxx11::basic_string<char>, int>, false, true>; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::const_iterator = std::__detail::_Node_const_iterator<std::pair<const std::__cxx11::basic_string<char>, int>, false, true>; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::value_type = std::pair<const std::__cxx11::basic_string<char>, int>]
+       insert(const_iterator __hint, const value_type& __x)
+       ^
+/usr/include/c++/5/bits/unordered_map.h:466:7: note:   candidate expects 2 arguments, 1 provided
+/usr/include/c++/5/bits/unordered_map.h:473:2: note: candidate: template<class _Pair, class> std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::iterator std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::const_iterator, _Pair&&) [with _Pair = _Pair; <template-parameter-2-2> = <template-parameter-1-2>; _Key = std::__cxx11::basic_string<char>; _Tp = int; _Hash = std::hash<std::__cxx11::basic_string<char> >; _Pred = std::equal_to<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, int> >]
+  insert(const_iterator __hint, _Pair&& __x)
+  ^
+/usr/include/c++/5/bits/unordered_map.h:473:2: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:86:27: note:   cannot convert ‘std::make_pair(_T1&&, _T2&&) [with _T1 = std::__cxx11::basic_string<char>; _T2 = Configuration*&; typename std::__decay_and_strip<_T2>::__type = Configuration*; typename std::__decay_and_strip<_Tp>::__type = std::__cxx11::basic_string<char>](((SearchAlgorithm*)this)->SearchAlgorithm::startConfig)’ (type ‘std::pair<std::__cxx11::basic_string<char>, Configuration*>’) to type ‘std::unordered_map<std::__cxx11::basic_string<char>, int>::const_iterator {aka std::__detail::_Node_const_iterator<std::pair<const std::__cxx11::basic_string<char>, int>, false, true>}’
+     hash.insert( make_pair(startConfig->toString(), startConfig) );
+                           ^
+In file included from /usr/include/c++/5/unordered_map:48:0,
+                 from src/headers/SearchAlgorithm.h:12,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/unordered_map.h:488:2: note: candidate: template<class _InputIterator> void std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(_InputIterator, _InputIterator) [with _InputIterator = _InputIterator; _Key = std::__cxx11::basic_string<char>; _Tp = int; _Hash = std::hash<std::__cxx11::basic_string<char> >; _Pred = std::equal_to<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, int> >]
+  insert(_InputIterator __first, _InputIterator __last)
+  ^
+/usr/include/c++/5/bits/unordered_map.h:488:2: note:   template argument deduction/substitution failed:
+src/SearchAlgorithm.cpp:86:66: note:   candidate expects 2 arguments, 1 provided
+     hash.insert( make_pair(startConfig->toString(), startConfig) );
+                                                                  ^
+In file included from /usr/include/c++/5/unordered_map:48:0,
+                 from src/headers/SearchAlgorithm.h:12,
+                 from src/SearchAlgorithm.cpp:5:
+/usr/include/c++/5/bits/unordered_map.h:499:7: note: candidate: void std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(std::initializer_list<typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::value_type>) [with _Key = std::__cxx11::basic_string<char>; _Tp = int; _Hash = std::hash<std::__cxx11::basic_string<char> >; _Pred = std::equal_to<std::__cxx11::basic_string<char> >; _Alloc = std::allocator<std::pair<const std::__cxx11::basic_string<char>, int> >; typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::value_type = std::pair<const std::__cxx11::basic_string<char>, int>]
+       insert(initializer_list<value_type> __l)
+       ^
+/usr/include/c++/5/bits/unordered_map.h:499:7: note:   no known conversion for argument 1 from ‘std::pair<std::__cxx11::basic_string<char>, Configuration*>’ to ‘std::initializer_list<std::pair<const std::__cxx11::basic_string<char>, int> >’
+make: *** [obj/SearchAlgorithm.o] Error 1

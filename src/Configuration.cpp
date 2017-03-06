@@ -33,6 +33,12 @@ Configuration& Configuration::operator=(const Configuration& c)
     return *this;
 }
 
+// destructor
+Configuration::~Configuration()
+{
+    delete parent;
+}
+
 vector<Configuration*> Configuration::makeDescendants()
 {
     vector<Configuration*> descendants;
@@ -71,6 +77,11 @@ int Configuration::getDepth() const
 int Configuration::getMove() const
 {
     return state.getMove();
+}
+
+Configuration* Configuration::getParent() const
+{
+    return parent;
 }
 
 ostream& operator<<(ostream& os, const Configuration& c)

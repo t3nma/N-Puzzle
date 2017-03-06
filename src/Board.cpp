@@ -127,15 +127,11 @@ vector<Board> Board::makeDescendants()
 	    {    
 		int **b = newBoard.getArr();
 		b[blankX][blankY] = arr[newBlankX][newBlankY];
-		b[newBlankX][newBlankY] = arr[blankX][blankY];
+		b[newBlankX][newBlankY] = 0;
 		
 		newBoard.setBlankX(newBlankX);
 		newBoard.setBlankY(newBlankY);
                 newBoard.setMove(moveToChar[m]);
-
-		cout << "Descendant:" << endl;
-		cout << newBoard << endl;
-		cout << "Move: " << newBoard.getMove() << endl;
 		
 		descendants.push_back(newBoard);
 	    }

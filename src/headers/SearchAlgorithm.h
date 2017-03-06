@@ -11,10 +11,11 @@
 #include "HeapComparator.h"
 #include <unordered_map>
 #include <queue>
+#include <vector>
 #include <ctime>
 
-
 using namespace std;
+
 
 class SearchAlgorithm
 {
@@ -43,16 +44,19 @@ public:
 private:
 
     priority_queue<NODE, vector<NODE>, HeapComparator> q; // our openSet representation
-    unordered_map<string,Configuration*> closedSet;
+    unordered_map<string,int> hash;
+    vector<Configuration*> closedSet;
     
     Configuration *startConfig;
     Configuration *goalConfig;
     int searchType;
     int depthLimit;
-    int nodeCount;
+    int nodeCount; 
+    struct timespec start;
     
     void printPath(Configuration *configPtr);
-    void printSolution(Configuration *solution, struct timespec *start, struct timespec *finish);
+    void printSolution(Configuration *solution, struct timespec *finish);
+    void clean();
 };
 
 #endif

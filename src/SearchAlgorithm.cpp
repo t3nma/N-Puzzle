@@ -12,13 +12,14 @@
 SearchAlgorithm::SearchAlgorithm(const Configuration& startConfig, const Configuration& goalConfig, int searchType)
     : startConfig( new Configuration(startConfig) ),
       goalConfig( new Configuration(goalConfig) ),
-      searchType(searchType)
+      searchType(searchType),
+      nodeCount(1)
 { }
 
 // destructor
 SearchAlgorithm::~SearchAlgorithm()
 {
-    delete startConfig;
+    delete startConfig;   
     delete goalConfig;
 }
 
@@ -39,26 +40,24 @@ bool SearchAlgorithm::enqueue(Configuration *c)
 	    break;
         case IDFS:
 	    if(c->getDepth() > depthLimit)
-		return false; // ignore sucessor, don't enqueue
+		return false; // ignore sucessor, don't enqueued
+	    
 	    cost = -1*c->getDepth(); break;
         default:
 	    return false;
     }
 
-    unordered_map<string,Configuration*>::const_iterator it = closedSet.find(c->toString());
-    
-    if(it != closedSet.end())
-    {
-	if( it->second->getDepth() > c->getDepth() )
-        {
-	    delete it->second;
-	    closedSet[it->first] = c;
-	}
+    unordered_map<string,int>::const_iterator it = hash.find(c->toString());
+
+    if(it != hash.end())
+    {	
+	if(it->second > c->getDepth() )
+	    hash[it->first] = c->getDepth();
 	else
-	    return false; // ignore sucessor, don't enqueue
+	    return false; // ignore sucessor, don't enqueue 
     }
     else
-	closedSet.insert( make_pair(c->toString(),c) );
+	hash.insert( make_pair(c->toString(), c->getDepth()) );
     
     q.push( make_pair(cost,c) );
     nodeCount++;
@@ -69,47 +68,53 @@ bool SearchAlgorithm::enqueue(Configuration *c)
 void SearchAlgorithm::enqueueAll(vector<Configuration*> cList)
 {
     for(size_t i=0; i<cList.size(); i++)
-	if(!enqueue(cList[i]))
-	    delete cList[i];
+	enqueue(cList[i]);
 }
 
 bool SearchAlgorithm::search()
 {
+    bool searchResult = false;
+    
     // init time counter
-    struct timespec start, finish;
-    clock_gettime(CLOCK_MONOTONIC, &start);
-
+    if(searchType != IDFS)
+	clock_gettime(CLOCK_MONOTONIC, &start);
+    
     // enqueue first node and init node counter
     enqueue(startConfig);
-    closedSet.insert( make_pair(startConfig->toString(), startConfig) );
-    nodeCount = 1;
+    hash.insert( make_pair(startConfig->toString(),0) );
 
     // do search step while there are nodes to visit
     while(!q.empty())
     {
 	NODE node = q.top(); q.pop();
-
+	
 	if(*node.second == *goalConfig)
 	{
-	    clock_gettime(CLOCK_MONOTONIC, &finish);
-            printSolution(node.second, &start, &finish);
-	    
-	    return true;
+	    struct timespec finish; 
+	    clock_gettime(CLOCK_MONOTONIC, &finish);	    
+            printSolution(node.second, &finish);
+	    searchResult = true;
+	    break;
 	}
 	
-	enqueueAll(node.second->makeDescendants());
-    }
+ 	enqueueAll(node.second->makeDescendants());
+	closedSet.push_back(node.second);
+     }
 
-    return false; // solution not found
+    clean();
+    return searchResult; // solution not found
 }
 
 bool SearchAlgorithm::iterativeSearch()
-{   
+{
+    // init time counter
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    
     depthLimit=0;
     while(!search() && depthLimit <= 150) // TODO handle hard coded limit 
     {
 	depthLimit++;
-	closedSet.clear();
+	hash.clear();
     }
 
     return (depthLimit <= 150);
@@ -117,24 +122,31 @@ bool SearchAlgorithm::iterativeSearch()
 
 void SearchAlgorithm::printPath(Configuration *configPtr)
 {
-    if (configPtr->parent != NULL)
+    if (configPtr->getParent() != NULL)
     {
-        printPath(configPtr->parent);
-        cout << (char) configPtr->getMove();
+        printPath(configPtr->getParent());
+        cout << (char)configPtr->getMove();
     }
-    
-    return;
 }
 
-void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *start, struct timespec *finish)
+void SearchAlgorithm::printSolution(Configuration *solution, struct timespec *finish)
 {
     // time calculation
-    double elapsed = (finish->tv_sec - start->tv_sec) + ((finish->tv_nsec - start->tv_nsec)/1000000000.0);
+    double elapsedTime = (finish->tv_sec - start.tv_sec) + ((finish->tv_nsec - start.tv_nsec)/1000000000.0);
     
     cout << "Found solution:" << endl;
-    printPath(solution);
     cout << "Depth: " << solution->getDepth() << endl;
+    cout << "Path: "; printPath(solution); cout << endl;
     cout << "Nodes: " << nodeCount << endl;
     cout << "Space: " << nodeCount * ((double)sizeof(Configuration) / (1024*1024)) << "Mb" << endl;
-    cout << setprecision(2) << "Time: " << elapsed << "s" << endl;
+    cout << setprecision(2) << "Time: " << elapsedTime << "s" << endl;
+}
+
+void SearchAlgorithm::clean()
+{    
+    while(!q.empty())
+	q.pop();
+
+    if (closedSet.size() > 1)
+	closedSet.erase(closedSet.begin()+1, closedSet.end());
 }

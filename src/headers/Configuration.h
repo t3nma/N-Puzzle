@@ -19,11 +19,10 @@ class Configuration
 {
 public:
     
-    Configuration *parent;
-    
     Configuration(const Board& state, int depth=0, Configuration *parent=NULL);
     Configuration(const Configuration& c);
     Configuration& operator=(const Configuration& c);
+    ~Configuration();
     
     /* util */
     vector<Configuration*> makeDescendants();
@@ -34,6 +33,7 @@ public:
     /* getters */
     int getDepth() const;
     int getMove() const;
+    Configuration* getParent() const;
     
     /* operator overloading */
     friend ostream& operator<<(ostream& os, const Configuration& c);
@@ -43,6 +43,7 @@ public:
 private:
     Board state;
     int depth;
+    Configuration *parent;
 };
 
 #endif
