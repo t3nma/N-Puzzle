@@ -1,5 +1,5 @@
 # N-Puzzle
-An **Artificial Intelligence** university work that focus on the study and implementation of search algorithms and their appliance in the famous N-Puzzle game.
+An **Artificial Intelligence** university work that focus on the study and implementation of search algorithms and their appliance in the famous N-Puzzle game. 
 
 
 <h2> Dependencies </h2>
@@ -7,6 +7,7 @@ Your C++ compiler should support **C++11**.
 If you're using a debian distro and anything wrong happens in the compilation process try to run this commands to update your system:
 
 `$ sudo apt-get update` 
+
 
 <h2> Usage </h2>
 1. From the project source directory, run `$ make` to compile the program.
