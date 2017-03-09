@@ -2,6 +2,7 @@
 An **Artificial Intelligence** university work that focus on the study and implementation of search algorithms and their appliance in the famous N-Puzzle game.
 
 Providing the initial and final state (game board) of an N-Puzzle game you'll be able to test the following search strategies performance:
+
 1. A*
 2. Greedy
 3. DFS
