@@ -11,6 +11,9 @@ Providing the initial and final (solution) state (game board) of an N-Puzzle gam
 
 Also, thes solvability of the providaded states is tested, so you'll be notified on an unsolvable game.
 
+<h2> Collaborators </h2>
+[Miguel Ramos](https://github.com/boilnkettle)
+
 <h2> Dependencies </h2>
 Your C++ compiler should support **C++11**.
 If you're using a debian distro and anything wrong happens in the compilation process try to run this commands to update your system:
