@@ -9,7 +9,7 @@ Providing the initial and final (solution) state (game board) of an N-Puzzle gam
 4. BFS
 5. IDFS
 
-Also, thes solvability of the providaded states is tested, so you'll be notified on an unsolvable game.
+Also, thes solvability of the provided states is tested, so you'll be notified on an unsolvable game.
 
 <h2> Collaborators </h2>
 [Miguel Ramos](https://github.com/boilnkettle)
@@ -22,6 +22,7 @@ If you're using a debian distro and anything wrong happens in the compilation pr
 
 
 <h2> Usage </h2>
+
 1. From the project source directory, run `$ make` to compile the program.
 2. Run `$ ./N-Puzzle {board-size}` to execute. If not specified, the default board size (side length) is 4.
 3. (optional) After using the program, you can run `$ make clean` to remove all the executables and object files.
